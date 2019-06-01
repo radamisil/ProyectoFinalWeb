@@ -37,147 +37,50 @@
         </div>
     </div>
 </nav>
+
 <!-- Header -->
 <header>
     <div class="container">
-        <div class="intro-text">
-            <div class="intro-lead-in">Ya no hay Tiempo para hacer Colas !!!</div>
-            <div class="intro-lead-in">Llegás y te Sentás a Disfrutar</div>
+        <div class="intro-text">            
             <a href="/Home/Registracion/" class="page-scroll btn btn-xl">Comenza ahora!</a>
         </div>
     </div>
 </header>
+
 <!-- Seccion producto -->
-<section id="producto">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Producto</h2>
-
-            </div>
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner carousel-images">
+        <div class="item active">
+            <h2 class="titulo-slider">La APP que estabas necesitando !!!</h2>
+            @Html.ActionLink("Quiero registrarme!", "Registracion", "Home", new { area = "" }, new { @class = "btn btn-lg btn-success btn-slider" })
+            <img src="../images/slider1.jpg" alt="slider">
         </div>
-        <div class="row text-center">
-            <div class="col-md-4">
-                <span class="fa-stack fa-4x">
-                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                    <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
-                </span>
-                <h4 class="service-heading">Lo que vos estabas Buscando</h4>
-                <p class="text-muted">Puntos de encuentro actualizados constantemente</p>
-            </div>
-            <div class="col-md-4">
-                <span class="fa-stack fa-4x">
-                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                    <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
-                </span>
-                <h4 class="service-heading">Compartí tu Ubicación</h4>
-                <p class="text-muted">Ayudá a que todos puedan saber como se encuentra el Lugar<br /></p>
-            </div>
-            <div class="col-md-4">
-                <span class="fa-stack fa-4x">
-                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                    <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
-                </span>
-                <h4 class="service-heading">Rapido y confiable</h4>
-                <p class="text-muted">Una APP fácil y rápida</p>
-            </div>
+        <div class="item">
+            <h2 class="titulo-slider">Podes voler a usar pedidos anteriores!</h2>
+            @Html.ActionLink("Iniciar sesión", "Login", "Home", new { area = "" }, new { @class = "btn btn-lg btn-success btn-slider" })
+            <img src="../images/slider2.jpg" alt="slider">
+        </div>
+        <div class="item">
+            <h2 class="titulo-slider">Podes compartir tus pedidos a tus amigos!</h2>
+            @Html.ActionLink("Mas información", "Login", "Home", new { area = "" }, new { @class = "btn btn-lg btn-success btn-slider" })
+            <img src="../images/slider3.jpg" alt="slider">
         </div>
     </div>
-</section>
-<!--seccion lugares -->
-<section id="vamos" class="bg-light-gray">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="section-heading">MAPA</h2>
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
 
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 col-sm-6 portfolio-item">
-                <div class="portfolio-hover">
-                    <div class="portfolio-hover-content">
-                        <i class="fa fa-plus fa-3x"></i>
-                    </div>
-                </div>
-                <img src="../images/emp/desesperado1.jpg" class="img-vamos" alt="" height="250">
-                <div class="portfolio-caption">
-                    <h4>Desesperado?</h4>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 portfolio-item">
-
-                <div class="portfolio-hover">
-                    <div class="portfolio-hover-content">
-                        <i class="fa fa-plus fa-3x"></i>
-                    </div>
-                </div>
-                <img src="../images/emp/celular4.jpg" class="img-vamos" alt="" height="250">
-
-                <div class="portfolio-caption">
-                    <h4>El celular siempre en la mano?</h4>
-
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 portfolio-item">
-
-                <div class="portfolio-hover">
-                    <div class="portfolio-hover-content">
-                        <i class="fa fa-plus fa-3x"></i>
-                    </div>
-                </div>
-                <img src="../images/emp/filas2.jpg" class="img-vamos" alt="" height="250">
-
-                <div class="portfolio-caption">
-                    <h4>Cansado de hacer filas?</h4>
-
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 portfolio-item">
-
-                <div class="portfolio-hover">
-                    <div class="portfolio-hover-content">
-                        <i class="fa fa-plus fa-3x"></i>
-                    </div>
-                </div>
-                <img src="../images/emp/reloj1.jpg" class="img-vamos" alt="" height="250">
-
-                <div class="portfolio-caption">
-                    <h4>No querés perder tiempo?</h4>
-
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 portfolio-item">
-
-                <div class="portfolio-hover">
-                    <div class="portfolio-hover-content">
-                        <i class="fa fa-plus fa-3x"></i>
-                    </div>
-                </div>
-                <img src="../images/emp/tiempo5.jpg" class="img-vamos" alt="" height="250px">
-
-                <div class="portfolio-caption">
-                    <h4>El tiempo vale Oro!!</h4>
-
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 portfolio-item">
-
-                <div class="portfolio-hover">
-                    <div class="portfolio-hover-content">
-                        <i class="fa fa-plus fa-3x"></i>
-                    </div>
-                </div>
-                <img src="../images/emp/filas5.jpg" class="img-vamos" alt="" height="250">
-
-                <div class="portfolio-caption">
-                    <h4>Las filas te sacan canas verdes?</h4>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 <!-- Seccion Images -->
 <section id="pedidos">
     <div class="container">
