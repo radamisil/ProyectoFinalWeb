@@ -188,9 +188,18 @@
     <Compile Include="Services\UsuarioService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\agency.css" />
+    <Content Include="Content\agency.min.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\build.min.css" />
+    <Content Include="Content\dataTables.bootstrap.css" />
     <Content Include="Content\dist\img\avatar5.png" />
+    <Content Include="Content\estilos.css" />
+    <Content Include="Content\fastselect.css" />
+    <Content Include="Content\fastselect.min.css" />
     <Content Include="images\emp\celular4.jpg" />
     <Content Include="images\emp\desesperado1.jpg" />
     <Content Include="images\emp\filas2.jpg" />
@@ -228,6 +237,11 @@
     <Content Include="Models\Entities\ADondeVamosBase.edmx.diagram">
       <DependentUpon>ADondeVamosBase.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\fastselect.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
