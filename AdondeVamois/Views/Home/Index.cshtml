@@ -1,31 +1,260 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@using AdondeVamos.Models
+@{
+    Html.RenderPartial("_EstiloIndex");
 }
+<nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand page-scroll" href="#page-top">A Donde Vamos ?</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="hidden">
+                    <a href="#page-top"></a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="/">Inicio</a>
+                </li>
+               
+                <li>
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+                    @if (@ClsSesion.GetUsuarioLogueado() != null)
+                    {
+                        <a class="page-scroll" href="/Mapa/Mapa/">Mi perfil(@ClsSesion.GetEmailLogueado())</a>
+                    }
+                    else
+                    {
+                        @*<a class="page-scroll" href="/Home/Login/">Iniciar Sesion</a>*@
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+                        @Html.ActionLink("Ya tengo cuenta", "Login", "Home", new { area = "" }, new { @class = "page-scroll" })
+                    }
+
+                </li>
+            </ul>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+</nav>
+<!-- Header -->
+<header>
+    <div class="container">
+        <div class="intro-text">
+            <div class="intro-lead-in">Ya no hay Tiempo para hacer Colas !!!</div>
+            <div class="intro-lead-in">Llegás y te Sentás a Disfrutar</div>
+            <a href="/Home/Registracion/" class="page-scroll btn btn-xl">Comenza ahora!</a>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+</header>
+<!-- Seccion producto -->
+<section id="producto">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Producto</h2>
+
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-4">
+                <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                </span>
+                <h4 class="service-heading">Lo que vos estabas Buscando</h4>
+                <p class="text-muted">Puntos de encuentro actualizados constantemente</p>
+            </div>
+            <div class="col-md-4">
+                <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
+                </span>
+                <h4 class="service-heading">Compartí tu Ubicación</h4>
+                <p class="text-muted">Ayudá a que todos puedan saber como se encuentra el Lugar<br /></p>
+            </div>
+            <div class="col-md-4">
+                <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
+                </span>
+                <h4 class="service-heading">Rapido y confiable</h4>
+                <p class="text-muted">Una APP fácil y rápida</p>
+            </div>
+        </div>
     </div>
-</div>
+</section>
+<!--seccion lugares -->
+<section id="vamos" class="bg-light-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">MAPA</h2>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-6 portfolio-item">
+                <div class="portfolio-hover">
+                    <div class="portfolio-hover-content">
+                        <i class="fa fa-plus fa-3x"></i>
+                    </div>
+                </div>
+                <img src="../images/emp/desesperado1.jpg" class="img-vamos" alt="" height="250">
+                <div class="portfolio-caption">
+                    <h4>Desesperado?</h4>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 portfolio-item">
+
+                <div class="portfolio-hover">
+                    <div class="portfolio-hover-content">
+                        <i class="fa fa-plus fa-3x"></i>
+                    </div>
+                </div>
+                <img src="../images/emp/celular4.jpg" class="img-vamos" alt="" height="250">
+
+                <div class="portfolio-caption">
+                    <h4>El celular siempre en la mano?</h4>
+
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 portfolio-item">
+
+                <div class="portfolio-hover">
+                    <div class="portfolio-hover-content">
+                        <i class="fa fa-plus fa-3x"></i>
+                    </div>
+                </div>
+                <img src="../images/emp/filas2.jpg" class="img-vamos" alt="" height="250">
+
+                <div class="portfolio-caption">
+                    <h4>Cansado de hacer filas?</h4>
+
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 portfolio-item">
+
+                <div class="portfolio-hover">
+                    <div class="portfolio-hover-content">
+                        <i class="fa fa-plus fa-3x"></i>
+                    </div>
+                </div>
+                <img src="../images/emp/reloj1.jpg" class="img-vamos" alt="" height="250">
+
+                <div class="portfolio-caption">
+                    <h4>No querés perder tiempo?</h4>
+
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 portfolio-item">
+
+                <div class="portfolio-hover">
+                    <div class="portfolio-hover-content">
+                        <i class="fa fa-plus fa-3x"></i>
+                    </div>
+                </div>
+                <img src="../images/emp/tiempo5.jpg" class="img-vamos" alt="" height="250px">
+
+                <div class="portfolio-caption">
+                    <h4>El tiempo vale Oro!!</h4>
+
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 portfolio-item">
+
+                <div class="portfolio-hover">
+                    <div class="portfolio-hover-content">
+                        <i class="fa fa-plus fa-3x"></i>
+                    </div>
+                </div>
+                <img src="../images/emp/filas5.jpg" class="img-vamos" alt="" height="250">
+
+                <div class="portfolio-caption">
+                    <h4>Las filas te sacan canas verdes?</h4>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Seccion Images -->
+<section id="pedidos">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Como funciona?</h2>
+                <h3 class="section-subheading text-muted">En simples pasos</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="timeline">
+                    <li>
+                        <div class="timeline-image">
+                            <img class="img-circle img-responsive" src="../images/slider1.jpg" alt="">
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+
+                                <h4 class="subheading">Inicias el pedido</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p class="text-muted">Colocas los datos necesarios para comenzar</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image">
+                            <img class="img-circle img-responsive" src="../images/slider2.jpg" alt="">
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+
+                                <h4 class="subheading">Elegis el lugar</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p class="text-muted">Podrás ver si el lugar está lleno</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-image">
+                            <img class="img-circle img-responsive" src="../images/slider3.jpg" alt="">
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="subheading">Podrás chatear con gente que allí se encuentre</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p class="text-muted">Podrás disfrutar, sin perder tiempos !!</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image">
+                            <img class="img-circle img-responsive" src="../images/fondo.jpg" alt="">
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="subheading">No pierdas Tiempo!!</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p class="text-muted">Fácil, rápido, es lo que estabas buscando !!</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image">
+                            <h3>
+                                A
+                                <br>disfrutar!
+
+                            </h3>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
