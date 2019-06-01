@@ -1,0 +1,27 @@
+﻿@using AdondeVamos.Models
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+
+    @RenderBody()
+    <hr />
+    <footer>
+        <p align="center">&copy; @DateTime.Now.Year - Empanadas de la Abuela</p>
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/agency.js")
+    @Scripts.Render("~/Scripts/agency.min.js")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
