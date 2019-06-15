@@ -33,7 +33,7 @@ namespace AdondeVamos.Services
             return result;
         }
 
-        protected List<SqlParameter> GetParameters(int filterId, string filterDescription)
+        protected List<SqlParameter> GetParameters(string filterDescription)
         {
             var parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@filterDescription", filterDescription.Replace("'", "''")));

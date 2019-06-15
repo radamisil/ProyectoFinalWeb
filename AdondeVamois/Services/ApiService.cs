@@ -14,13 +14,13 @@ namespace AdondeVamos.Services
         /// <summary>
         /// se reciben datos del SP_ obtenido y se mapea contra el DTO
         /// </summary>
-        public List<PromocionDTO> GetPromocion(int filterId, string filterDescription)
+        public List<PromocionDTO> GetPromocion(string filterDescription)
         {
             var promocionDtoList = new List<PromocionDTO>();
-            var promocionList = ApiService.GetPromocionesByTable(filterId, filterDescription);
+            var promocionList = GetPromocionesByTable(filterDescription);
 
-            if ((promocionDtoList != null) && (promocionDtoList.Count > 0))
-                foreach (Promociones promocion in promocionDtoList)
+            if ((promocionList != null) && (promocionList.Count > 0))            
+                foreach(Promociones promocion in promocionList)
                 {
                     PromocionDTO promoDto = new PromocionDTO();
                     promoDto.idPromotion = promocion.idPromocion;
@@ -35,18 +35,18 @@ namespace AdondeVamos.Services
         /// <summary>
         /// se ejecuta SP_ y se reciben datos de la tabla activa.
         /// </summary>
-        public IList<PromocionDTO> GetPromocionesByTable(int filterId, string filterDescription)
+        public IList<Promociones> GetPromocionesByTable(string filterDescription)
         {         
-            var parameters = GetParameters(filterId, filterDescription);
+            var parameters = GetParameters(filterDescription);
             var promociones = GetDataTable("SP_GetPromocion", parameters);
             var promocionesQueryable = (from promocion in promociones.AsEnumerable()
                                         select new Promociones
                                         {
-                                            idPromocion = promocion.Field<int>("Id"),
-                                            Descripcion = promocion.Field<string>("Descripción")
+                                           idPromocion = promocion.Field<int>("Id"),
+                                           Descripcion = promocion.Field<string>("Descripción")
                                         }).ToList();
 
-            return promocionesQueryable.ToList();
+            return promocionesQueryable;
         }        
     }   
 }

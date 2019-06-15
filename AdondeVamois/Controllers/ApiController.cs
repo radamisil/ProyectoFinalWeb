@@ -16,9 +16,9 @@ namespace AdondeVamos.Controllers
         /// GET promociones
         /// </summary>
         [Route("promociones")]
-        public IHttpActionResult GetPromociones([FromUri]string filterId = "", [FromUri]string filterDescription = "")
+        public IHttpActionResult GetPromociones([FromUri]string filterDescription = "")
         {
-            var list = ApiService.GetPromocion(filterId, filterDescription);
+            var list = ApiService.GetPromocion(filterDescription);
         }
         return null;
     }
