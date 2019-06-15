@@ -7,27 +7,36 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AdondeVamos.Models.Entities
+namespace AdondeVamos.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Lugares
+    public partial class Usuarios
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Lugares()
+        public Usuarios()
         {
+            this.Promociones = new HashSet<Promociones>();
+            this.Usuario_lugar_historial = new HashSet<Usuario_lugar_historial>();
             this.Usuario_lugares = new HashSet<Usuario_lugares>();
-            this.Metricas = new HashSet<Metricas>();
         }
     
-        public int IdLugar { get; set; }
+        public int IdUsuario { get; set; }
         public string Nombre { get; set; }
-        public string Id_dia { get; set; }
+        public string Apellido { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public System.DateTime Fecha_nac { get; set; }
+        public string Foto { get; set; }
+        public Nullable<int> IdTipo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Usuario_lugares> Usuario_lugares { get; set; }
+        public virtual ICollection<Promociones> Promociones { get; set; }
+        public virtual Tipo_Usuarios Tipo_Usuarios { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Metricas> Metricas { get; set; }
+        public virtual ICollection<Usuario_lugar_historial> Usuario_lugar_historial { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Usuario_lugares> Usuario_lugares { get; set; }
     }
 }

@@ -7,28 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AdondeVamos.Models.Entities
+namespace AdondeVamos.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Usuarios
+    public partial class Tipo_Usuarios
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Usuarios()
+        public Tipo_Usuarios()
         {
-            this.Usuario_lugares = new HashSet<Usuario_lugares>();
+            this.Usuarios = new HashSet<Usuarios>();
         }
     
-        public int IdUsuario { get; set; }
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public System.DateTime Fecha_nac { get; set; }
-        public Nullable<int> Tipo { get; set; }
+        public int IdTipo { get; set; }
+        public string Descripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Usuario_lugares> Usuario_lugares { get; set; }
+        public virtual ICollection<Usuarios> Usuarios { get; set; }
     }
 }

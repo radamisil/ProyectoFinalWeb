@@ -7,19 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AdondeVamos.Models.Entities
+namespace AdondeVamos.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Metricas
+    public partial class Usuario_lugar_historial
     {
-        public int IdMetrica { get; set; }
-        public string Dia { get; set; }
-        public Nullable<int> Hora { get; set; }
-        public Nullable<int> IdLugar { get; set; }
-        public Nullable<int> cantidad { get; set; }
+        public int IdUsu_lug_hist { get; set; }
+        public Nullable<int> idUsuario { get; set; }
+        public Nullable<int> idLugar { get; set; }
+        public string coordenadasGoogle { get; set; }
+        public string nombreGoogle { get; set; }
+        public Nullable<System.DateTime> fecha { get; set; }
     
         public virtual Lugares Lugares { get; set; }
+        public virtual Usuarios Usuarios { get; set; }
     }
 }

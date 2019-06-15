@@ -7,16 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AdondeVamos.Models.Entities
+namespace AdondeVamos.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Usuario_lugares
+    public partial class Promociones
     {
-        public int IdLugar { get; set; }
+        public int idPromocion { get; set; }
+        public string Descripcion { get; set; }
         public int IdUsuario { get; set; }
-        public string Comentario { get; set; }
+        public int IdLugar { get; set; }
     
         public virtual Lugares Lugares { get; set; }
         public virtual Usuarios Usuarios { get; set; }
