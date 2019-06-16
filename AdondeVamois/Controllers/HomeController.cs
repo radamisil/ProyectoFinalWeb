@@ -1,5 +1,4 @@
-﻿using AdondeVamos.Models.Entities;
-using AdondeVamos.Models;
+﻿using AdondeVamos.Models;
 using AdondeVamos.Services;
 using System;
 using System.Collections.Generic;

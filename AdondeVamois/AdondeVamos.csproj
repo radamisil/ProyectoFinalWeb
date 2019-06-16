@@ -166,6 +166,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ClsSesion.cs" />
+    <Compile Include="Models\DTO\PageResultDTO.cs" />
     <Compile Include="Models\DTO\PromocionDTO.cs" />
     <Compile Include="Models\Entities.Context.cs">
       <AutoGen>True</AutoGen>
@@ -315,6 +316,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

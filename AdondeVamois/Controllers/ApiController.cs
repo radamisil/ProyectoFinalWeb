@@ -1,26 +1,43 @@
-﻿using AdondeVamos.Services;
+﻿using AdondeVamos.Models;
+using AdondeVamos.Models.DTO;
+using AdondeVamos.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Http;
-using System.Web.Mvc;
 
 namespace AdondeVamos.Controllers
-{ 
-[RoutePrefix("api/adondevamos")]
+{
+    [RoutePrefix("api/adondevamos")]
 
-    public class ApiController : Controller
+    public class ApiController
     {
+        ApiService Api = new ApiService();
         /// <summary>
         /// GET promociones
         /// </summary>
         [Route("promociones")]
         public IHttpActionResult GetPromociones([FromUri]string filterDescription = "")
-        {
-            var list = ApiService.GetPromocion(filterDescription);
+        {            
+            try
+            {
+                var list = Api.GetPromocion(filterDescription);
+                return Ok(new PageResultDTO<PromocionDTO>(list));
+            }
+            catch (Exception e) { LogError("GetPromociones", filterDescription, e); }
+            return null;
         }
-        return null;
-    }
 
+        private void LogError(string v, string filterDescription, Exception e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private IHttpActionResult Ok(PageResultDTO<PromocionDTO> pageResultDTO)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
+
+
+
+

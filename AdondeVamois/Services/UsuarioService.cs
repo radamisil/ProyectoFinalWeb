@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using AdondeVamos.Models.Entities;
 using System.Data.Entity.Validation;
+using AdondeVamos.Models;
 
 namespace AdondeVamos.Services
 {
     public class UsuarioServicio
     {
-        private A_DONDE_VAMOSEntities1 condb = new A_DONDE_VAMOSEntities1();
+        private A_DONDE_VAMOSEntities condb = new A_DONDE_VAMOSEntities();
         //Variables para mostrar los mensajes de error
         private static string MENSAJE_MAIL_PASS_INCORRECTOS = "E-mail y/o contraseña incorrectos, por favor intentá nuevamente";
         private static string MENSAJE_MAIL_EXISTENTE = "Ese e-mail no está disponible, por favor ingresá otro";
