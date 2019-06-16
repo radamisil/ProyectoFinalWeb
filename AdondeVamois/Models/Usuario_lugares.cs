@@ -7,19 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AdondeVamos.Models.Entities
+namespace AdondeVamos.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Metricas
+    public partial class Usuario_lugares
     {
-        public int IdMetrica { get; set; }
-        public string Dia { get; set; }
-        public Nullable<int> Hora { get; set; }
-        public Nullable<int> IdLugar { get; set; }
-        public Nullable<int> cantidad { get; set; }
+        public int IdLugar { get; set; }
+        public int IdUsuario { get; set; }
+        public string Comentario { get; set; }
     
         public virtual Lugares Lugares { get; set; }
+        public virtual Usuarios Usuarios { get; set; }
     }
 }

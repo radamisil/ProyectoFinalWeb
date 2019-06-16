@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AdondeVamos.Models.Entities
+namespace AdondeVamos.Models
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class A_DONDE_VAMOSEntities1 : DbContext
+    public partial class A_DONDE_VAMOSEntities : DbContext
     {
-        public A_DONDE_VAMOSEntities1()
-            : base("name=A_DONDE_VAMOSEntities1")
+        public A_DONDE_VAMOSEntities()
+            : base("name=A_DONDE_VAMOSEntities")
         {
         }
     
@@ -25,8 +25,11 @@ namespace AdondeVamos.Models.Entities
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Horarios_concurridos> Horarios_concurridos { get; set; }
         public virtual DbSet<Lugares> Lugares { get; set; }
-        public virtual DbSet<Metricas> Metricas { get; set; }
+        public virtual DbSet<Promociones> Promociones { get; set; }
+        public virtual DbSet<Tipo_Usuarios> Tipo_Usuarios { get; set; }
+        public virtual DbSet<Usuario_lugar_historial> Usuario_lugar_historial { get; set; }
         public virtual DbSet<Usuario_lugares> Usuario_lugares { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
     }
