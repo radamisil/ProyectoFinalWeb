@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Data.Entity.Validation;
 using AdondeVamos.Models;
 
@@ -10,6 +9,7 @@ namespace AdondeVamos.Services
     public class UsuarioServicio
     {
         private A_DONDE_VAMOSEntities condb = new A_DONDE_VAMOSEntities();
+
         //Variables para mostrar los mensajes de error
         private static string MENSAJE_MAIL_PASS_INCORRECTOS = "E-mail y/o contraseña incorrectos, por favor intentá nuevamente";
         private static string MENSAJE_MAIL_EXISTENTE = "Ese e-mail no está disponible, por favor ingresá otro";
@@ -31,11 +31,9 @@ namespace AdondeVamos.Services
 
         public List<Usuarios> GetAll()
         {
-
             List<Usuarios> users = (from u in condb.Usuarios select u).ToList();
 
             return users;
-
         }
 
         public Usuarios loguearUsuarioPorEmail(Usuarios usuario)
@@ -137,16 +135,12 @@ namespace AdondeVamos.Services
 
 
         public void activarRegistroUsuarioExistente(Usuarios usuario)
-        {
-            //var usuarioExistente = context.Usuarios.Where(u => u.IdUsuario == usuario.IdUsuario).First();
+        {            
             Usuarios usuarioExistente = (from u in condb.Usuarios
                                          where u.Email == usuario.Email
                                         select u).First();
 
             usuarioExistente.Password = usuario.Password;
-            condb.SaveChanges();
-
-            //return usuarioExistente;
         }
 
         public String mostrarMensajeDeError()
@@ -166,6 +160,5 @@ namespace AdondeVamos.Services
             }
             return mensaje;
         }
-
     }
 }

@@ -162,6 +162,7 @@
     <Compile Include="Controllers\ApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MapaController.cs" />
+    <Compile Include="Controllers\PromocionesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -208,6 +209,7 @@
     <Compile Include="Services\ApiService.cs" />
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\MapaService.cs" />
+    <Compile Include="Services\PromocionService.cs" />
     <Compile Include="Services\UsuarioService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -296,6 +298,7 @@
     <Content Include="Views\Shared\_EstiloIndex.cshtml" />
     <Content Include="Views\Shared\_UsuarioLayout.cshtml" />
     <Content Include="Views\Shared\_AnonimoLayout.cshtml" />
+    <Content Include="Views\Promociones\AltaPromocion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
