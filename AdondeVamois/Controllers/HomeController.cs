@@ -53,6 +53,7 @@ namespace AdondeVamois.Controllers
             if (ModelState.IsValid)
             {
                 usrLogueado = _usuarioServicio.loguearUsuarioPorEmail(usr);
+                
 
                 if (usrLogueado == null)
                 {
@@ -67,11 +68,7 @@ namespace AdondeVamois.Controllers
                     TempData["usuario"] = usrLogueado.Email;
                     Session["usuario"] = usrLogueado.Email;
                     ClsSesion.SetUsuarioLogueado(usrLogueado);
-
-                    //Para testear la clase session 
-                    //ClsSesion.GetUsuarioLogueado();
-                    //ClsSesion.EliminarSesion();
-
+                    
                     return RedirectToAction("Mapa", "Mapa");
                 }
             }

@@ -1,0 +1,35 @@
+﻿@model AdondeVamos.Models.Promociones
+@using AdondeVamos.Models
+
+
+@using (Html.BeginForm("AltaPromo", "Promociones", "Post"))
+{
+    @Html.AntiForgeryToken()
+    
+            <div class="container">
+                <div id="login-row" class="row justify-content-center align-items-center">
+                    <div id="login-column" class="col-md-12">
+                        <div id="login-box" class="col-md-12">
+                            <div class="form" role="form">
+                                <div class="row setup-content" id="step-1">
+                                    <h3>Datos de la Promoción</h3>
+                                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Lugares.Nombre, htmlAttributes: new { @class = "text-info" })
+                                        @Html.EditorFor(model => model.Lugares.Nombre, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre del Lugar", autocomplete = "off" } })
+                                        @Html.ValidationMessageFor(model => model.Lugares.Nombre, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "text-info" })
+                                        @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control", placeholder = "Descripción de la nueva Promo", autocomplete = "off" } })
+                                        @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                                    </div>
+                                    <button class="btn btn-success nextBtn btn-lg pull-center" type="button">Siguiente</button>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+     
+}
