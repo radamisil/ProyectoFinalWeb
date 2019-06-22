@@ -1,4 +1,5 @@
-﻿using AdondeVamos.Models;
+﻿using AdondeVamos.Facade;
+using AdondeVamos.Models;
 using AdondeVamos.Models.DTO;
 using AdondeVamos.Services;
 using System;
@@ -10,6 +11,8 @@ namespace AdondeVamos.Controllers
 
     public class ApiController
     {
+        private readonly IUsuarioFacade usuarioFacade;
+        
         ApiService Api = new ApiService();
         /// <summary>
         /// GET promociones
@@ -34,6 +37,15 @@ namespace AdondeVamos.Controllers
         private IHttpActionResult Ok(PageResultDTO<PromocionDTO> pageResultDTO)
         {
             throw new NotImplementedException();
+        }
+
+        [Route("Login")]
+        public void User([FromBody]UserDto loginPost)
+        {    
+            if (loginPost != null)           
+            {
+                usuarioFacade.AddUsuario(loginPost);
+            }                     
         }
     }
 }

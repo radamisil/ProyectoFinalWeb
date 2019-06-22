@@ -7,7 +7,7 @@ namespace AdondeVamos.Services
 {
     public class PromocionService
     {
-        private A_DONDE_VAMOSEntities ctx = new A_DONDE_VAMOSEntities();
+        private A_DONDE_VAMOS ctx = new A_DONDE_VAMOS();
 
         public Promociones ObtenerPromocionPorId(int? id)
         {

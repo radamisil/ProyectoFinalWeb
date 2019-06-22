@@ -21,10 +21,12 @@ namespace AdondeVamos.Models
             this.Usuario_lugar_historial = new HashSet<Usuario_lugar_historial>();
             this.Usuario_lugares = new HashSet<Usuario_lugares>();
             this.Promociones = new HashSet<Promociones>();
+            this.Seguidores = new HashSet<Seguidores>();
         }
     
         public int IdLugar { get; set; }
         public string Nombre { get; set; }
+        public int Capacidad { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Horarios_concurridos> Horarios_concurridos { get; set; }
@@ -34,5 +36,7 @@ namespace AdondeVamos.Models
         public virtual ICollection<Usuario_lugares> Usuario_lugares { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Promociones> Promociones { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Seguidores> Seguidores { get; set; }
     }
 }

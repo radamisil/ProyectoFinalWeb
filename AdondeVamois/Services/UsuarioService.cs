@@ -8,7 +8,7 @@ namespace AdondeVamos.Services
 {
     public class UsuarioServicio
     {
-        private A_DONDE_VAMOSEntities condb = new A_DONDE_VAMOSEntities();
+        private A_DONDE_VAMOS condb = new A_DONDE_VAMOS();
 
         //Variables para mostrar los mensajes de error
         private static string MENSAJE_MAIL_PASS_INCORRECTOS = "E-mail y/o contraseña incorrectos, por favor intentá nuevamente";
