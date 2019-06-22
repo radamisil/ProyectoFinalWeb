@@ -1,4 +1,6 @@
 ﻿@using AdondeVamos.Models
+@model AdondeVamos.Models.Usuarios
+
 @{
     Html.RenderPartial("_EstiloIndex");
 }
@@ -34,127 +36,108 @@
         </div>
     </div>
 </nav>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>A donde vamos?</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- Header -->
-<header>
-    <div class="container">
-        <div class="intro-text">
-            <a href="/Home/Registracion/" class="page-scroll btn btn-xl">Comenza ahora!</a>
-        </div>
-    </div>
-</header>
+    <link rel="stylesheet" type="text/css" href="dist/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="dist/vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="dist/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="dist/vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css" href="dist/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="dist/vendor/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="dist/css/util.css">
+    <link rel="stylesheet" type="text/css" href="dist/css/main.css">
+</head>
+<body>
+    <div class="limiter">
+        <div class="container-login100" style=" background: linear-gradient(180deg, #FFAB00, #C2185B), url('../img/intro-bg.jpg') center top no-repeat;">
+            <div class="wrap-login100 p-l-60 p-r-60 p-t-62 p-b-33">
+                <form id="login-form" class="login100-form validate-form flex-sb flex-w" action="Loguear" method="post">
+                    @Html.AntiForgeryToken()
+                    @if (string.IsNullOrEmpty(ViewBag.Mensaje))
+                     {<div class="form-group">
+                        <span class="login100-form-title p-b-53">
+                            Antes de empezar, inicia sesion!
+                        </span>
+                        <div class="p-t-31 p-b-9">
+                            <span class="txt1">
+                                Usuario
+                            </span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="Usuario requerido">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "section-info" })
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control ", placeholder = "Email", autocomplete = "off" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "alert-danger" })
+                        </div>
 
-<!-- Seccion producto -->
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
-    <div class="carousel-inner carousel-images">
-        <div class="item active">
-            <h2 class="titulo-slider">La APP que estabas necesitando !!!</h2>
-            @Html.ActionLink("Quiero registrarme!", "Registracion", "Home", new { area = "" }, new { @class = "btn btn-lg btn-success btn-slider" })
-            <img src="../images/slider1.jpg" alt="slider">
-        </div>
-        <div class="item">
-            <h2 class="titulo-slider">Podes voler a usar pedidos anteriores!</h2>
-            @Html.ActionLink("Iniciar sesión", "Login", "Home", new { area = "" }, new { @class = "btn btn-lg btn-success btn-slider" })
-            <img src="../images/slider2.jpg" alt="slider">
-        </div>
-        <div class="item">
-            <h2 class="titulo-slider">Podes compartir tus pedidos a tus amigos!</h2>
-            @Html.ActionLink("Mas información", "Login", "Home", new { area = "" }, new { @class = "btn btn-lg btn-success btn-slider" })
-            <img src="../images/slider3.jpg" alt="slider">
-        </div>
-    </div>
-    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>
+                        <div class="p-t-13 p-b-9">
+                            <span class="txt1">
+                                Contraseña
+                            </span>
 
-<!-- Seccion Images -->
-<section id="pedidos">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Como funciona?</h2>
-                <h3 class="section-subheading text-muted">En simples pasos</h3>
+                            <a href="#" class="txt2 bo1 m-l-5">
+                                no la recordas?
+                            </a>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="Contraseña requerida">
+                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "section-info" })
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password", autocomplete = "off" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "alert-danger" })
+                        </div>
+
+                        <div class="form-group col-lg-6 col-lg-offset-3">
+                            <label for="remember-me" class="section-info"><span>Recordar usuario</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label>
+                            <br />
+                            <br />
+                            <input type="submit" name="submit" class="btn btn-xl" value="Ingresar">
+                            <br />
+                            <br />
+                            <div id="register-link" class="text-center">
+                                @Html.ActionLink("Aun no tengo cuenta", "Registracion", "Home", new { area = "" }, new { @class = "btn btn-primary btn-md" })
+                            </div>
+                        </div>
+                    </div>
+                     }
+                        @if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+                         {
+                            <div class="col-md-12">
+
+                               <h5>Sera redireccionado en unos segundos..</h5>
+                                @if (string.Equals(ViewBag.Mensaje, "E-mail y/o contraseña incorrectos, por favor intentá nuevamente"))
+                                 {
+                                    <div class="alert alert-danger text-center">
+                                        <h5>@ViewBag.Mensaje</h5>
+                                        <meta http-equiv="refresh" content="2; url=/Home/login">
+                                    </div>
+                                }
+                                @if (!string.Equals(ViewBag.Mensaje, "E-mail y/o contraseña incorrectos, por favor intentá nuevamente"))
+                                {
+                                    <div class="alert alert-success text-center">
+                                        <h5>@ViewBag.Mensaje</h5>
+                                        <meta http-equiv="refresh" content="3; url=/">
+                                    </div>
+                                 }
+                            </div>
+                         }
+                    </form>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <ul class="timeline">
-                    <li>
-                        <div class="timeline-image">
-                            <img class="img-circle img-responsive" src="../images/slider1.jpg" alt="">
-                        </div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
 
-                                <h4 class="subheading">Inicias la APP</h4>
-                            </div>
-                            <div class="timeline-body">
-                                <p class="text-muted">Colocas los datos necesarios para comenzar</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-image">
-                            <img class="img-circle img-responsive" src="../images/slider2.jpg" alt="">
-                        </div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
+        <div id="dropDownSelect1"></div>
+        <script src="dist/vendor/jquery/jquery-3.2.1.min.js"></script>
+        <script src="dist/vendor/animsition/js/animsition.min.js"></script>
+        <script src="dist/vendor/bootstrap/js/popper.js"></script>
+        <script src="dist/vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="dist/vendor/select2/select2.min.js"></script>
+        <script src="dist/vendor/daterangepicker/moment.min.js"></script>
+        <script src="dist/vendor/daterangepicker/daterangepicker.js"></script>
+        <script src="dist/vendor/countdowntime/countdowntime.js"></script>
+        <script src="dist/js/main.js"></script>
 
-                                <h4 class="subheading">Elegis el lugar</h4>
-                            </div>
-                            <div class="timeline-body">
-                                <p class="text-muted">Podrás ver si el lugar está lleno</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="timeline-image">
-                            <img class="img-circle img-responsive" src="../images/slider3.jpg" alt="">
-                        </div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4 class="subheading">Podrás chatear con gente que allí se encuentre</h4>
-                            </div>
-                            <div class="timeline-body">
-                                <p class="text-muted">Podrás disfrutar, sin perder tiempos !!</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-image">
-                            <img class="img-circle img-responsive" src="../images/fondo.jpg" alt="">
-                        </div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4 class="subheading">No pierdas Tiempo!!</h4>
-                            </div>
-                            <div class="timeline-body">
-                                <p class="text-muted">Fácil, rápido, es lo que estabas buscando !!</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-image">
-                            <h3>
-                                A
-                                <br>disfrutar!
-
-                            </h3>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
+    </body>
+</html>

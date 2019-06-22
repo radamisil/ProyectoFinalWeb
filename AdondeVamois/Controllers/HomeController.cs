@@ -10,8 +10,6 @@ namespace AdondeVamois.Controllers
 {
     public class HomeController : Controller
     {
-
-
         private readonly UsuarioServicio _usuarioServicio = new UsuarioServicio();
 
         public ActionResult Index()
