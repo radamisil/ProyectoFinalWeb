@@ -1,4 +1,5 @@
 ﻿using AdondeVamos.Models;
+using AdondeVamos.Models.DTO;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -47,6 +48,43 @@ namespace AdondeVamos.Services
                                         }).ToList();
 
             return promocionesQueryable;
-        }        
+        }
+
+        public List<UserDto> GetUsuario(string filterDescription)
+        {
+            var usuarioDtoList = new List<UserDto>();
+            var usuarioList = GetUsuarioByTable(filterDescription);
+
+            if ((usuarioList != null) && (usuarioList.Count > 0))
+                foreach (Usuarios usuario in usuarioList)
+                {
+                    UserDto usuarioDto = new UserDto();
+                    usuarioDto.Email = usuario.Email;
+                    usuarioDto.Nombre = usuario.Nombre;
+                    usuarioDto.Apellido = usuario.Apellido;
+                    usuarioDto.Password = usuario.Password;
+
+                    usuarioDtoList.Add(usuarioDto);
+                }
+            return usuarioDtoList;
+        }
+
+        public IList<Usuarios> GetUsuarioByTable(string filterDescription)
+        {
+            var parameters = GetParameters(filterDescription);
+            var usuarios = GetDataTable("SP_GetUsuarios", parameters);
+            var promocionesQueryable = (from usuario in usuarios.AsEnumerable()
+                                        select new Usuarios
+                                        {
+                                            IdUsuario = usuario.Field<int>("IdUsuario"),
+                                            Nombre = usuario.Field<string>("Nombre"),
+                                            Apellido = usuario.Field<string>("Apellido"),
+                                            Email = usuario.Field<string>("Email"),
+                                            Password = usuario.Field<string>("Password")
+
+                                        }).ToList();
+
+            return promocionesQueryable;
+        }
     }   
 }

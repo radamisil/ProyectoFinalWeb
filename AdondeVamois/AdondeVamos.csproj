@@ -175,6 +175,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ClsSesion.cs" />
+    <Compile Include="Models\DTO\LugarDTO.cs" />
     <Compile Include="Models\DTO\PageResultDTO.cs" />
     <Compile Include="Models\DTO\PromocionDTO.cs" />
     <Compile Include="Models\DTO\UserDto.cs" />
