@@ -14,10 +14,11 @@ namespace AdondeVamos.Controllers
         private readonly IUsuarioFacade usuarioFacade;
         
         ApiService Api = new ApiService();
+
         /// <summary>
         /// GET promociones
         /// </summary>
-        [Route("promociones")]
+        [Route("Promotions")]
         public IHttpActionResult GetPromociones([FromUri]string filterDescription = "")
         {            
             try
@@ -26,6 +27,21 @@ namespace AdondeVamos.Controllers
                 return Ok(new PageResultDTO<PromocionDTO>(list));
             }
             catch (Exception e) { LogError("GetPromociones", filterDescription, e); }
+            return null;
+        }
+
+        /// <summary>
+        /// GET Usuarios Registrados
+        /// </summary>
+        [Route("User")]
+        public IHttpActionResult GetLogin([FromUri]string filterDescription = "")
+        {
+            try
+            {
+                var list = Api.GetUsuario(filterDescription);
+                //return Ok(new PageResultDTO<UserDto>(list));
+            }
+            catch (Exception e) { LogError("GetUsuarios", filterDescription, e); }
             return null;
         }
 
@@ -39,14 +55,17 @@ namespace AdondeVamos.Controllers
             throw new NotImplementedException();
         }
 
-        [Route("Login")]
+        /// <summary>
+        /// Se graban usuarios nuevos
+        /// </summary>
+        [Route("Register")]
         public void User([FromBody]UserDto loginPost)
-        {    
-            if (loginPost != null)           
+        {
+            if (loginPost != null)
             {
                 usuarioFacade.AddUsuario(loginPost);
-            }                     
-        }
+            }
+        }        
     }
 }
 

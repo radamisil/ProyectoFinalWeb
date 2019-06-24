@@ -25,7 +25,15 @@ namespace AdondeVamos.Facade
 
         private UserDto InternalAddUsuario(UserDto loginPost)
         {
-            Usuarios usariosGrabar = mapper.Map<Usuarios>(loginPost);    
+            Usuarios usariosGrabar = mapper.Map<Usuarios>(loginPost);
+            Usuarios addUsuario = new Usuarios();
+
+            addUsuario.IdUsuario = loginPost.IdUsuario;
+            addUsuario.Nombre = loginPost.Nombre;
+            addUsuario.Apellido = loginPost.Apellido;
+            addUsuario.Email = loginPost.Email;
+            addUsuario.Password = loginPost.Password;            
+
             SaveChanges();
 
             return loginPost;
