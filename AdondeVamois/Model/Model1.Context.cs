@@ -7,14 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AdondeVamos.Models
+namespace AdondeVamos.Model
 {
-    using AdondeVamos.DAL;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public class A_DONDE_VAMOS : DbContext, IDbContext
+    public partial class A_DONDE_VAMOS : DbContext
     {
         public A_DONDE_VAMOS()
             : base("name=A_DONDE_VAMOS")
@@ -34,27 +33,5 @@ namespace AdondeVamos.Models
         public virtual DbSet<Usuario_lugar_historial> Usuario_lugar_historial { get; set; }
         public virtual DbSet<Usuario_lugares> Usuario_lugares { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
-
-        public virtual DbSet<TEntity> SetEx<TEntity>() where TEntity : class
-        {
-            return base.Set<TEntity>();
-        }
-
-        #region IDbContext
-        public virtual bool CanUpdate()
-        {
-            return true;
-        }
-
-        Database IDbContext.Database()
-        {
-            return Database;
-        }
-
-        IDbSet<TEntity> IDbContext.Set<TEntity>()
-        {
-            return SetEx<TEntity>();
-        }
-        #endregion
     }
 }

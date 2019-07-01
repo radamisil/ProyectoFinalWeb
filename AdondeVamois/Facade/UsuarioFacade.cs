@@ -1,7 +1,7 @@
 ﻿using AdondeVamos.DAL;
 using AdondeVamos.Model.UnitOfWork;
-using AdondeVamos.Models;
-using AdondeVamos.Models.DTO;
+using AdondeVamos.Model;
+using AdondeVamos.Model.DTO;
 using AutoMapper;
 
 namespace AdondeVamos.Facade

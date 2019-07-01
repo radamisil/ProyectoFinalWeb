@@ -4,7 +4,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 
-namespace AdondeVamos.Models
+namespace AdondeVamos.Model
 {
     public static class ClsSesion
     {

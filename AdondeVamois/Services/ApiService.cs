@@ -1,5 +1,5 @@
-﻿using AdondeVamos.Models;
-using AdondeVamos.Models.DTO;
+﻿using AdondeVamos.Model;
+using AdondeVamos.Model.DTO;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,10 +15,10 @@ namespace AdondeVamos.Services
         /// <summary>
         /// se reciben datos del SP_ obtenido y se mapea contra el DTO
         /// </summary>
-        public List<PromocionDTO> GetPromocion(string filterDescription)
+        public List<PromocionDTO> GetPromocion(string filterPlace, string filterUser)
         {
             var promocionDtoList = new List<PromocionDTO>();
-            var promocionList = GetPromocionesByTable(filterDescription);
+            var promocionList = GetPromocionesByTable(filterPlace, filterUser);
 
             if ((promocionList != null) && (promocionList.Count > 0))            
                 foreach(Promociones promocion in promocionList)
@@ -36,10 +36,10 @@ namespace AdondeVamos.Services
         /// <summary>
         /// se ejecuta SP_ y se reciben datos de la tabla activa.
         /// </summary>
-        public IList<Promociones> GetPromocionesByTable(string filterDescription)
+        public IList<Promociones> GetPromocionesByTable(string filterPlace, string filterUser)
         {         
-            var parameters = GetParameters(filterDescription);
-            var promociones = GetDataTable("SP_GetPromocion", parameters);
+            var parameters = GetParameters(filterPlace, filterUser);
+            var promociones = GetDataTable("SP_GetPromociones", parameters);
             var promocionesQueryable = (from promocion in promociones.AsEnumerable()
                                         select new Promociones
                                         {
@@ -50,15 +50,16 @@ namespace AdondeVamos.Services
             return promocionesQueryable;
         }
 
-        public List<UserDto> GetUsuario(string filterDescription)
+        public List<UserDto> GetUsuario(string filter)
         {
             var usuarioDtoList = new List<UserDto>();
-            var usuarioList = GetUsuarioByTable(filterDescription);
+            var usuarioList = GetUsuarioByTable(filter);
 
             if ((usuarioList != null) && (usuarioList.Count > 0))
                 foreach (Usuarios usuario in usuarioList)
                 {
                     UserDto usuarioDto = new UserDto();
+                    usuarioDto.IdUsuario = usuario.IdUsuario;
                     usuarioDto.Email = usuario.Email;
                     usuarioDto.Nombre = usuario.Nombre;
                     usuarioDto.Apellido = usuario.Apellido;
@@ -69,11 +70,11 @@ namespace AdondeVamos.Services
             return usuarioDtoList;
         }
 
-        public IList<Usuarios> GetUsuarioByTable(string filterDescription)
+        public IList<Usuarios> GetUsuarioByTable(string filter)
         {
-            var parameters = GetParameters(filterDescription);
+            var parameters = GetParametersUser(filter);
             var usuarios = GetDataTable("SP_GetUsuarios", parameters);
-            var promocionesQueryable = (from usuario in usuarios.AsEnumerable()
+            var usuariosQueryable = (from usuario in usuarios.AsEnumerable()
                                         select new Usuarios
                                         {
                                             IdUsuario = usuario.Field<int>("IdUsuario"),
@@ -84,7 +85,7 @@ namespace AdondeVamos.Services
 
                                         }).ToList();
 
-            return promocionesQueryable;
+            return usuariosQueryable;
         }
     }   
 }

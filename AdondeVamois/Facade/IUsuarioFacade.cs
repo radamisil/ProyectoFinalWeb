@@ -1,4 +1,4 @@
-﻿using AdondeVamos.Models.DTO;
+﻿using AdondeVamos.Model.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;

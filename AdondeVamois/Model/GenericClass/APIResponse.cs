@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace AdondeVamos.Models.GenericClass
+namespace AdondeVamos.Model.GenericClass
 {
     public class APIResponse
     {       

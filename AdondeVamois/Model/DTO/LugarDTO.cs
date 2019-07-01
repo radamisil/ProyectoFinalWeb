@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace AdondeVamos.Models.DTO
+namespace AdondeVamos.Model.DTO
 {
     public class LugarDTO
     {

@@ -1,7 +1,7 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
 
-namespace AdondeVamos.Models.DTO
+namespace AdondeVamos.Model.DTO
 {
     public class UserDto
     {
