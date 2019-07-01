@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity.Validation;
-using AdondeVamos.Models;
+using AdondeVamos.Model;
 
 namespace AdondeVamos.Services
 {

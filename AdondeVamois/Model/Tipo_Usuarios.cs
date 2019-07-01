@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AdondeVamos.Models
+namespace AdondeVamos.Model
 {
     using System;
     using System.Collections.Generic;

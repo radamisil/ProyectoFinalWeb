@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AdondeVamos.Models.DTO
+namespace AdondeVamos.Model.DTO
 {
     public class PageResultDTO<T>
     {

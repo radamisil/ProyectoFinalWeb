@@ -1,4 +1,4 @@
-﻿using AdondeVamos.Models;
+﻿using AdondeVamos.Model;
 using System.Collections.Generic;
 using System.Linq;
 

@@ -1,5 +1,5 @@
 ﻿
-namespace AdondeVamos.Models
+namespace AdondeVamos.Model
 {
     public class PromocionDTO
     {
