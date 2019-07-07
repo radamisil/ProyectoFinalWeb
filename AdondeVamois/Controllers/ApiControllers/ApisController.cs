@@ -23,10 +23,10 @@ namespace AdondeVamos.Controllers
          */
 
         ApiService Api = new ApiService();
+
         /// <summary>
         /// GET promociones
         /// </summary>
-
         [Route("Promotions")]
         public IHttpActionResult GetPromotions([FromUri]string filterPlace = "", [FromUri]string filterUser = "")
         {            
@@ -41,6 +41,7 @@ namespace AdondeVamos.Controllers
 
         /// <summary>
         /// GET Usuarios Registrados
+        /// 
         /// </summary>
         [HttpGet]
         [Route("User")]
@@ -64,7 +65,7 @@ namespace AdondeVamos.Controllers
         {
             if (loginPost != null)
             {
-               // UsuarioFacade.AddUsuario(loginPost);
+                //UsuarioFacade.AddUsuario(loginPost);
             }
         }
 

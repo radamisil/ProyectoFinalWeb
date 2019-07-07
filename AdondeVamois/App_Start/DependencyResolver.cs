@@ -39,10 +39,11 @@ namespace AdondeVamois.Dependencies
             /// register all available facades
             /// </summary>
             builder.RegisterType<UsuarioFacade>().As<IUsuarioFacade>();
-            
+           // builder.RegisterType<UsuarioFacade>().As<IUsuarioFacade>();
+
             //var autoMapperConfig = new AutoMapperConfig();
-                      
-           // var mapper = autoMapperConfig.Configuration.CreateMapper();
+
+            // var mapper = autoMapperConfig.Configuration.CreateMapper();
             ///builder.RegisterInstance<IMapper>(mapper);
 
             return builder.Build();

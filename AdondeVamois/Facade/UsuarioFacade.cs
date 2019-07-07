@@ -32,7 +32,12 @@ namespace AdondeVamos.Facade
             addUsuario.Nombre = loginPost.Nombre;
             addUsuario.Apellido = loginPost.Apellido;
             addUsuario.Email = loginPost.Email;
-            addUsuario.Password = loginPost.Password;            
+            addUsuario.Password = loginPost.Password;
+            addUsuario.Fecha_nac = loginPost.Fecha_nac;
+            addUsuario.Foto = loginPost.Foto;
+            addUsuario.IdTipo = loginPost.Tipo;
+
+
 
             SaveChanges();
 
