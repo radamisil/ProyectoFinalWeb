@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace AdondeVamos.Model.DTO
@@ -19,5 +20,12 @@ namespace AdondeVamos.Model.DTO
 
         [Required]
         public string Password { get; set; }
+
+        [Required]
+        public DateTime Fecha_nac { get; set; }
+
+        public string Foto { get; set; }
+
+        public int Tipo { get; set; }
     }
 }
