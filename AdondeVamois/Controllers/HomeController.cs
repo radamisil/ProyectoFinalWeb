@@ -10,7 +10,7 @@ namespace AdondeVamois.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly UsuarioServicio _usuarioServicio = new UsuarioServicio();
+        private readonly UsuarioService _usuarioService = new UsuarioService();
 
         public ActionResult Index()
         {
@@ -50,12 +50,12 @@ namespace AdondeVamois.Controllers
 
             if (ModelState.IsValid)
             {
-                usrLogueado = _usuarioServicio.loguearUsuarioPorEmail(usr);
+                usrLogueado = _usuarioService.loguearUsuarioPorEmail(usr);
                 
 
                 if (usrLogueado == null)
                 {
-                    ViewBag.Mensaje = _usuarioServicio.mostrarMensajeDeError();
+                    ViewBag.Mensaje = _usuarioService.mostrarMensajeDeError();
                     return View("Login", usr);
                 }
                 else
@@ -88,13 +88,13 @@ namespace AdondeVamois.Controllers
             {
                 String pass2 = Request["pass2"];
 
-                if (_usuarioServicio.SaveUsuario(usr, pass2))
+                if (_usuarioService.SaveUsuario(usr, pass2))
                 {
                     ViewBag.Mensaje = "Usuario Generado con exito";
                 }
                 else
                 {
-                    ViewBag.Mensaje = _usuarioServicio.mostrarMensajeDeError();
+                    ViewBag.Mensaje = _usuarioService.mostrarMensajeDeError();
                 }
             }
             return View("Registracion");

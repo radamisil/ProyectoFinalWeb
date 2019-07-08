@@ -44,9 +44,9 @@ namespace AdondeVamos.Model.UnitOfWork
                             erroresValidacion = erroresValidacion + String.Format("- Property: \"{0}\", Error: \"{1}\"", ve.PropertyName, ve.ErrorMessage) + "\r\n";
                         }
                     }
-                    throw new Exception(erroresValidacion);
+                    throw new SystemException(erroresValidacion);
                 }
-                catch (Exception)
+                catch (SystemException)
                 {
                     dbContextTransaction.Rollback();
                     throw;
@@ -65,7 +65,7 @@ namespace AdondeVamos.Model.UnitOfWork
                     SaveResult = _dbContext.SaveChanges();
                     dbContextTransaction.Commit();
                 }
-                catch (Exception)
+                catch (SystemException)
                 {
                     dbContextTransaction.Rollback();
                     throw;

@@ -6,13 +6,18 @@ using AutoMapper;
 
 namespace AdondeVamos.Facade
 {
+
     public class UsuarioFacade : BaseFacade, IUsuarioFacade
-    {        
+    {
+        private A_DONDE_VAMOS ctx = new A_DONDE_VAMOS();
+
+        private readonly IMapper Mapper;
+
         public UsuarioFacade(IUnitOfWork unitOfWork, IMapper mapper) : base (unitOfWork, mapper)
-        {           
+        {
+            Mapper = mapper;
         }
-        protected IMapper mapper;
-       
+            
         public UserDto AddUsuario(UserDto loginPost)
         {
             int saveResult;
@@ -25,21 +30,23 @@ namespace AdondeVamos.Facade
 
         private UserDto InternalAddUsuario(UserDto loginPost)
         {
-            Usuarios usariosGrabar = mapper.Map<Usuarios>(loginPost);
+            //Usuarios usuariosGrabar = mapper.Map<Usuarios>(loginPost);
             Usuarios addUsuario = new Usuarios();
 
-            addUsuario.IdUsuario = loginPost.IdUsuario;
-            addUsuario.Nombre = loginPost.Nombre;
-            addUsuario.Apellido = loginPost.Apellido;
-            addUsuario.Email = loginPost.Email;
-            addUsuario.Password = loginPost.Password;
-            addUsuario.Fecha_nac = loginPost.Fecha_nac;
-            addUsuario.Foto = loginPost.Foto;
-            addUsuario.IdTipo = loginPost.Tipo;
+            if (loginPost != null)
+            {
+                addUsuario.Nombre = loginPost.Nombre;
+                addUsuario.Apellido = loginPost.Apellido;
+                addUsuario.Email = loginPost.Email;
+                addUsuario.Password = loginPost.Password;
+                addUsuario.Fecha_nac = loginPost.Fecha_nac;
+                //addUsuario.Foto = loginPost.Foto;
+                addUsuario.IdTipo = loginPost.Tipo;
+            }
 
-
-
-            SaveChanges();
+            ctx.Usuarios.Add(addUsuario);
+            ctx.SaveChanges();
+            //SaveChanges();
 
             return loginPost;
         }

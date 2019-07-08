@@ -11,7 +11,8 @@ namespace AdondeVamos.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Lugares
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,7 +24,8 @@ namespace AdondeVamos.Model
             this.Promociones = new HashSet<Promociones>();
             this.Seguidores = new HashSet<Seguidores>();
         }
-    
+
+        [Key]
         public int IdLugar { get; set; }
         public string Nombre { get; set; }
         public int Capacidad { get; set; }

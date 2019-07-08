@@ -11,7 +11,8 @@ namespace AdondeVamos.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Tipo_Usuarios
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,7 +20,8 @@ namespace AdondeVamos.Model
         {
             this.Usuarios = new HashSet<Usuarios>();
         }
-    
+
+        [Key]
         public int IdTipo { get; set; }
         public string Descripcion { get; set; }
     
