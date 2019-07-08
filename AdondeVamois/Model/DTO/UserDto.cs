@@ -6,8 +6,8 @@ namespace AdondeVamos.Model.DTO
 {
     public class UserDto
     {
-        [Required]
-        public int IdUsuario { get; set; }
+        //[Required]
+        //public int IdUsuario { get; set; }
 
         [Required]
         public string Nombre { get; set; }
@@ -24,7 +24,7 @@ namespace AdondeVamos.Model.DTO
         [Required]
         public DateTime Fecha_nac { get; set; }
 
-        public string Foto { get; set; }
+        //public string Foto { get; set; }
 
         public int Tipo { get; set; }
     }

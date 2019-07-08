@@ -1,6 +1,7 @@
 ﻿using AdondeVamos.DAL;
 using AdondeVamos.Facade;
 using AdondeVamos.Mapping;
+using Autofac.Integration.Mvc;
 using AdondeVamos.Model.UnitOfWork;
 using Autofac;
 using Autofac.Core;
@@ -10,6 +11,10 @@ using log4net;
 using System;
 using System.Linq;
 using System.Reflection;
+using AdondeVamos.Repository;
+using AdondeVamos.Services;
+using AdondeVamos.Services.Interfaces;
+using AdondeVamos.Model.GenericClass;
 
 namespace AdondeVamois.Dependencies
 {    
@@ -26,25 +31,49 @@ namespace AdondeVamois.Dependencies
             builder.RegisterApiControllers(assemblyInfo);
 
             //register all controllers
-            //builder.RegisterControllers(assemblyInfo);
+            builder.RegisterControllers(assemblyInfo);
 
             //inject Log4Net dependency
-            //builder.RegisterModule(new LogInjectionModule());
-                        
+            builder.RegisterModule(new LogInjectionModule());
 
-            //builder.RegisterType<MercadoLibreRepository>().As<IMercadoLibreRepository>();
+            //register DbContext, UnitOfWork and Repositories
+            builder.RegisterType<aDondeVamosContext>()
+                .As<IDbContext>()
+                .InstancePerRequest();
+            builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>));
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
+
+            /// <summary>
+            /// register all available services
+            /// </summary>
+            builder.RegisterType<ApiService>().As<IApiService>();
 
             /// <summary>
             /// register all available facades
             /// </summary>
             builder.RegisterType<UsuarioFacade>().As<IUsuarioFacade>();
-           // builder.RegisterType<UsuarioFacade>().As<IUsuarioFacade>();
+            //builder.RegisterType<APIResponse>();
 
-            //var autoMapperConfig = new AutoMapperConfig();
+            //register all project services 
+            builder.RegisterType<BaseService>();
+            builder.RegisterType<PromocionService>();
+            builder.RegisterType<UsuarioService>();            
 
-            // var mapper = autoMapperConfig.Configuration.CreateMapper();
-            ///builder.RegisterInstance<IMapper>(mapper);
+            var autoMapperConfig = new AutoMapperConfig();
+
+            Type[] typesApi = Assembly.GetExecutingAssembly().GetExportedTypes();
+            //Type[] typesModel = Assembly.Load("AdondeVamos.Model").GetExportedTypes();
+            //Type[] typesServices = Assembly.Load("AdondeVamos.Services").GetExportedTypes();
+
+            var types = new Type[typesApi.Length];
+            typesApi.CopyTo(types, 0);
+            //typesModel.CopyTo(types, typesApi.Length);
+            //typesServices.CopyTo(types, typesApi.Length + typesModel.Length);
+
+
+            autoMapperConfig.Execute(types);
+            var mapper = autoMapperConfig.Configuration.CreateMapper();
+            builder.RegisterInstance<IMapper>(mapper);
 
             return builder.Build();
         }                 

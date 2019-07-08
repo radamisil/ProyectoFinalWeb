@@ -11,9 +11,11 @@ namespace AdondeVamos.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Horarios_concurridos
     {
+        [Key]
         public int IdHorarios_concurridos { get; set; }
         public string Dia { get; set; }
         public Nullable<int> Hora { get; set; }

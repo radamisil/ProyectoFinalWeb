@@ -11,9 +11,11 @@ namespace AdondeVamos.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Usuario_lugares
     {
+        [Key]
         public int IdLugar { get; set; }
         public int IdUsuario { get; set; }
         public string Comentario { get; set; }

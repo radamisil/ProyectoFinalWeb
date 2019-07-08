@@ -1,5 +1,6 @@
 ﻿using AdondeVamos.Model;
 using AdondeVamos.Model.DTO;
+using AdondeVamos.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,7 +10,7 @@ using System.Web;
 
 namespace AdondeVamos.Services
 {
-    public class ApiService : BaseService
+    public class ApiService : BaseService, IApiService
     {
 
         /// <summary>
@@ -59,7 +60,6 @@ namespace AdondeVamos.Services
                 foreach (Usuarios usuario in usuarioList)
                 {
                     UserDto usuarioDto = new UserDto();
-                    usuarioDto.IdUsuario = usuario.IdUsuario;
                     usuarioDto.Email = usuario.Email;
                     usuarioDto.Nombre = usuario.Nombre;
                     usuarioDto.Apellido = usuario.Apellido;

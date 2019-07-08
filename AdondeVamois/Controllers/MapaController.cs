@@ -11,7 +11,7 @@ namespace AdondeVamos.Controllers
     public class MapaController : Controller
     {
         static Usuarios usuarioLogueado = new Usuarios();        
-        private readonly UsuarioServicio _usuarioServicio = new UsuarioServicio();
+        private readonly UsuarioService _usuarioService = new UsuarioService();
         // GET: Mapa
 
         [HttpGet]

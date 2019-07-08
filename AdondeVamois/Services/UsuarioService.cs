@@ -6,7 +6,7 @@ using AdondeVamos.Model;
 
 namespace AdondeVamos.Services
 {
-    public class UsuarioServicio
+    public class UsuarioService
     {
         private A_DONDE_VAMOS condb = new A_DONDE_VAMOS();
 

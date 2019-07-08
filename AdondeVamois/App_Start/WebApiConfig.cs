@@ -22,12 +22,11 @@ namespace AdondeVamois
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            /*if (Container == null)
+            if (Container == null)
             {
                 Container = DependencyResolver.Setup();
             }
             config.DependencyResolver = new AutofacWebApiDependencyResolver(Container);
-            */
         }
     }
 }
