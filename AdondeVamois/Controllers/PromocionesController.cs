@@ -25,5 +25,27 @@ namespace AdondeVamos.Controllers
             { }
             return RedirectToAction("AltaPromocion");
         }
+
+        [HttpGet]
+        public ActionResult Modificar(int promocionId)
+        {
+            Promociones promociones = ps.ObtenerPromocionPorId(promocionId);
+            return View("");
+        }
+
+        [HttpPost]
+        public ActionResult Modificar(Promociones promociones)
+        {
+            ps.EditarPromocionExistente(promociones);
+
+            return RedirectToAction("Listado", "Promociones");
+        }
+
+        public ActionResult Eliminar(int promocionId)
+        {
+            ps.EliminarPromocion(promocionId);
+
+            return RedirectToAction("Listado", "Promociones");
+        }        
     }
 }
