@@ -1,4 +1,5 @@
 ﻿
+using AdondeVamos.Model.GenericClass;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -9,13 +10,13 @@ namespace AdondeVamos.Model.DTO
         //[Required]
         //public int IdUsuario { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         public string Nombre { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         public string Apellido { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         public string Email { get; set; }
 
         [Required]
@@ -24,8 +25,9 @@ namespace AdondeVamos.Model.DTO
         [Required]
         public DateTime Fecha_nac { get; set; }
 
-        //public string Foto { get; set; }
+        public string Foto { get; set; }
 
+        [MinValue(0, "{0} must be greater than or equal to zero")]
         public int Tipo { get; set; }
     }
 }

@@ -30,7 +30,6 @@ namespace AdondeVamos.Facade
 
         private UserDto InternalAddUsuario(UserDto loginPost)
         {
-            //Usuarios usuariosGrabar = mapper.Map<Usuarios>(loginPost);
             Usuarios addUsuario = new Usuarios();
 
             if (loginPost != null)
@@ -40,14 +39,13 @@ namespace AdondeVamos.Facade
                 addUsuario.Email = loginPost.Email;
                 addUsuario.Password = loginPost.Password;
                 addUsuario.Fecha_nac = loginPost.Fecha_nac;
-                //addUsuario.Foto = loginPost.Foto;
+                addUsuario.Foto = loginPost.Foto;
                 addUsuario.IdTipo = loginPost.Tipo;
             }
 
             ctx.Usuarios.Add(addUsuario);
             ctx.SaveChanges();
-            //SaveChanges();
-
+           
             return loginPost;
         }
     }

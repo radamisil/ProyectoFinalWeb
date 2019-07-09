@@ -64,12 +64,20 @@ namespace AdondeVamos.Controllers
         [Route("Register")]
         public UserDto Register([FromBody]UserDto loginPost)
         {
+
+            String MENSAJE;
+            MENSAJE = "No se pudo Registrar el nuevo Usuario";
+
             //try
             UserDto usuarioAgregado = new UserDto();
 
             if (loginPost != null)
             {
                 usuarioAgregado = UsuarioFacade.AddUsuario(loginPost);
+            }
+            else
+            {
+                //return MENSAJE;
             }
             return usuarioAgregado;
         }

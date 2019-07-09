@@ -197,6 +197,7 @@
     <Compile Include="Model\DTO\UserDto.cs" />
     <Compile Include="Model\Exception\ApertureValidationException.cs" />
     <Compile Include="Model\GenericClass\APIResponse.cs" />
+    <Compile Include="Model\GenericClass\MinValueAttribute.cs" />
     <Compile Include="Model\Horarios_concurridos.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

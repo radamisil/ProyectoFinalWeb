@@ -14,7 +14,7 @@ namespace AdondeVamos.Model.GenericClass
         public object Data { get; set; }
         public bool isOk { get; }
 
-        /*public abstract APIResponse Error(string message = "");
+        /*public  APIResponse Error(string message = "");
         public abstract APIResponse Error(int status, string message);
         public abstract APIResponse OK(string message = "");
         public abstract APIResponse OK(object data, string message);*/    
