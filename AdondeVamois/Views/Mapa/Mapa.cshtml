@@ -1,54 +1,319 @@
-﻿@using AdondeVamos.Models
-@model AdondeVamos.Models.Entities.Usuarios
+﻿@using AdondeVamos.Model
+@model AdondeVamos.Model.Usuarios
 
-<div class="wrapper">
-    <header class="main-header">
-        <!-- Logo -->
-        <a href="#" class="logo">
-            <!-- mini logo for sidebar mini 50x50 pixels -->
-            <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>A Donde Vamos ? SECCION MAPA</b> </span>
-        </a>
-        <!-- Header Navbar: style can be found in header.less -->
-        <nav class="navbar navbar-static-top">
-            <!-- Sidebar toggle button-->
-            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
-            <div class="navbar-custom-menu">
-                <ul class="nav navbar-nav">
-                    <li>
-                        @*<a href="#" data-toggle="control-sidebar" class="info"><i class="fa fa-arrow-left"></i> Volver al sitio</a>*@
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <!-- Left side column. contains the logo and sidebar -->
-    <aside class="main-sidebar">
-        <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
-            <!-- Sidebar user panel -->
-            <div class="user-panel">
-                <div class="pull-left image">
-                    <img src="~/Content/dist/img/avatar5.png" class="img-circle" alt="User Image">
-                </div>
-                <div class="info">
-                    <h6>@Session["Usuario"]</h6>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>A donde vamos?</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet"  href="@Url.Content("~/Content/panel/plugins/font-awesome/css/font-awesome.min.css")">
+    <!-- IonIcons -->
+    <link rel="stylesheet"  href="@Url.Content("http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css")">
+    <!-- Theme style -->
+    <link rel="stylesheet"  href="@Url.Content("~/Content/panel/dist/css/adminlte.min.css")">
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"   href="@Url.Content("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700")">
+    <link rel="stylesheet"  href="@Url.Content("https://fonts.googleapis.com/icon?family=Material+Icons")">
+    <!--Estilos -->
+    <link rel="stylesheet"  href="@Url.Content("~/Content/panel/dist/css/stylebuscador.css")">
+    <!--Buscador-->
+    <script src="@Url.Content("https://rawgit.com/dbrekalo/attire/master/dist/js/build.min.js")"></script>
+    <link rel="stylesheet"  href="@Url.Content("~/Content/panel/dist/fastselect/fastselect.min.css")">
+    <script src="@Url.Content("~/Content/panel/dist/fastselect/fastselect.standalone.js")"></script>
+    <style>
+        #map {
+            height: 70%;
+        }
 
-                </div>
-            </div>
+        #description {
+            font-family: Roboto;
+            font-size: 15px;
+            font-weight: 300;
+        }
 
-            <ul class="sidebar-menu" data-widget="tree">
-                <li>
-                    @Html.ActionLink("Cerrar sesion", "Salir", "Home")
+        #infowindow-content .title {
+            font-weight: bold;
+        }
+
+        #infowindow-content {
+            display: none;
+        }
+
+        #map #infowindow-content {
+            display: inline;
+        }
+
+        .pac-card {
+            margin: 10px 10px 0 0;
+            border-radius: 2px 0 0 2px;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            outline: none;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            background-color: #fff;
+            font-family: Roboto;
+        }
+
+        #pac-container {
+            padding-bottom: 12px;
+            margin-right: 12px;
+        }
+
+        .pac-controls {
+            display: inline-block;
+            padding: 5px 11px;
+        }
+
+            .pac-controls label {
+                font-family: Roboto;
+                font-size: 13px;
+                font-weight: 300;
+            }
+
+        #pac-input {
+            background-color: #fff;
+            font-family: Roboto;
+            font-size: 15px;
+            font-weight: 300;
+            margin-left: 12px;
+            padding: 0 11px 0 13px;
+            text-overflow: ellipsis;
+            width: 400px;
+        }
+
+            #pac-input:focus {
+                border-color: #4d90fe;
+            }
+
+
+
+        #target {
+            width: 345px;
+        }
+        .toggleBtn {
+            display: none;
+        }
+    </style>
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper" style="margin-top:-16px;">
+        <nav class="main-header navbar navbar-expand bg-dark navbar-dark border-bottom">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
                 </li>
             </ul>
-        </section>
-        <!-- /.sidebar -->
-    </aside>
-</div>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item d-none d-sm-inline-block">
+                    <strong>Tenes un comercio? si te adheris y sumas promociones, tambien sumas visitantes!</strong>&nbsp;&nbsp;<a class="btn btn-success btn-xs" href="altaComerciante">Mas info</a>
+                </li>
+                <li>
+                    &nbsp;
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="miCuenta" class="nav-link">Mi cuenta </a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="http://adondevamos.ddns.net" class="nav-link">Salir</a>
+                </li>
+            </ul>
+        </nav>
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Logo -->
+            <a href="indexUsuario.html" class="brand-link">
+                <img src="@Url.Content("~/Content/panel/dist/img/icon.png")" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">A donde vamos?</span>
+            </a>
+            <div class="sidebar">
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img src="@Url.Content("~/Content/panel/dist/img/avatar5.png")" class="img-circle elevation-2" alt="User Image">
+                    </div>
+                    <div class="info">
+                        <a href="#" class="d-block">@Session["Usuario"]</a>
+                    </div>
+                </div>
+                <!--Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <li class="nav-item">
+                            <a href="Mapa" class="nav-link active">
+                                <i class="nav-icon fa fa-search"></i>
+                                <p>
+                                    Buscar lugar..
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="Promociones" class="nav-link">
+                                <i class="nav-icon fa fa-search"></i>
 
+                                Buscar promociones..
+
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <div class="content-wrapper">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0 text-dark">A donde vamos hoy?</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input id="pac-input" class="input100" type="text" placeholder="Ingrese lugar, dirección o palabra clave">
+            <div id="map"></div>
+            @*<div class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-body" style="background-color:white;">
+                                        <br />
+                                        <div class="row">
+                                            <div class="col col-md-6 col-sm-12">
+                                                <h3></h3>
+                                            </div>
+                                            <div class="col col-md-6 col-sm-12 ">
+                                                <form action="">
+                                                    <div class="wrap-input100 validate-input" data-validate="Correo requerido">
+                                                        <input class="input100" placeholder="Indique un lugar, dirección, etc" type="text" />
+
+                                                        <span class="focus-input100"></span>
+                                                    </div>
+                                                    <button class="submitBtn" type="submit">Buscar</button>
+
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <hr class="attireSeparator mod2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="map"></div>
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-body">
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>*@
+        </div>
+        <aside class="control-sidebar control-sidebar-dark"></aside>
+    </div>
+    <!-- REQUIRED SCRIPTS -->
+    <script>
+        function initAutocomplete() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: -34.6705129, lng: -58.5628652 },
+                zoom: 13,
+                mapTypeId: 'roadmap'
+            });
+
+            // Create the search box and link it to the UI element.
+            var input = document.getElementById('pac-input');
+            var searchBox = new google.maps.places.SearchBox(input);
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+            // Bias the SearchBox results towards current map's viewport.
+            map.addListener('bounds_changed', function () {
+                searchBox.setBounds(map.getBounds());
+            });
+
+            var markers = [];
+
+            // Listen for the event fired when the user selects a prediction and retrieve
+            // more details for that place.
+            searchBox.addListener('places_changed', function () {
+                var places = searchBox.getPlaces();
+
+                if (places.length == 0) {
+                    return;
+                }
+
+                // Clear out the old markers.
+                markers.forEach(function (marker) {
+                    marker.setMap(null);
+                });
+                markers = [];
+
+                // For each place, get the icon, name and location.
+                var bounds = new google.maps.LatLngBounds();
+                var i = 0;
+                places.forEach(function (place) {
+                    if (!place.geometry) {
+                        console.log("Returned place contains no geometry");
+                        return;
+                    }
+                    var infowindow = null;
+                    /* now inside your initialise function */
+                    infowindow = new google.maps.InfoWindow({
+
+                    });
+
+
+                        if (i < markers.length) {
+                            var marker = markers[i];
+                            google.maps.event.addListener(marker, 'click', function () {
+                                // where I have added .html to the marker object.
+                                infowindow.setContent("<input type='hidden' id='place_id' name='place_id' value='" + place.place_id + "' /><h5 align='center'>" + place.name + "</h5><br/><button class='btn btn-info btn-xs btn-block' onClick='window.location.href=\"lugar?lugar=" + place.place_id + "\"'>Mas info</button> ");
+                                infowindow.open(map, this);
+
+                            });
+                            
+                            i++;
+                    };
+
+
+
+                    // Create a marker for each place.
+                    markers.push(new google.maps.Marker({
+                        map: map,
+                        icon: "@Url.Content("~/Content/panel/dist/img/maker.png")",
+                        title: place.name,
+                        position: place.geometry.location
+                    }));
+
+
+                    if (place.geometry.viewport) {
+                        // Only geocodes have viewport.
+                        bounds.union(place.geometry.viewport);
+                    } else {
+                        bounds.extend(place.geometry.location);
+                    }
+
+                });
+                map.fitBounds(bounds);
+            });
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMfHFvJTPHMgD5zBbRbuJdOjIOJ_HdL4o&libraries=places&callback=initAutocomplete" async defer></script>
+
+    <script src="@Url.Content("~/Content/panel/plugins/jquery/jquery.min.js")"></script>
+    <!-- Bootstrap -->
+    <script src="@Url.Content("~/Content/panel/plugins/bootstrap/js/bootstrap.bundle.min.js")"></script>
+    <!-- AdminLTE -->
+    <script src="@Url.Content("~/Content/panel/dist/js/adminlte.js")"></script>
+    <!-- OPTIONAL SCRIPTS -->
+    <script src="@Url.Content("~/Content/panel/plugins/chart.js/Chart.min.js")"></script>
+    <script src="@Url.Content("~/Content/panel/dist/js/demo.js")"></script>
+    <script src="@Url.Content("~/Content/panel/dist/js/pages/dashboard3.js")"></script>
+
+</body>
+</html>

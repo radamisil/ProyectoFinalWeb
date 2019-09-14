@@ -11,11 +11,9 @@ namespace AdondeVamos.Model
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Seguidores
     {
-        [Key]
         public int Idseguidor { get; set; }
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<int> IdLugar { get; set; }

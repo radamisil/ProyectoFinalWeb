@@ -11,11 +11,9 @@ namespace AdondeVamos.Model
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Usuario_lugar_historial
     {
-        [Key]
         public int IdUsu_lug_hist { get; set; }
         public Nullable<int> idUsuario { get; set; }
         public Nullable<int> idLugar { get; set; }

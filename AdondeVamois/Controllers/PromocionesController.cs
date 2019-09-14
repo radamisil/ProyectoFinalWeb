@@ -46,6 +46,6 @@ namespace AdondeVamos.Controllers
             ps.EliminarPromocion(promocionId);
 
             return RedirectToAction("Listado", "Promociones");
-        }        
+        }
     }
 }

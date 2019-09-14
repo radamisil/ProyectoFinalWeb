@@ -6,75 +6,56 @@
 @{
     Html.RenderPartial("_EstiloIndex");
 }
-<nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
+<nav id="mainNav">
     <div class="container">
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-            </button>
-            <a class="navbar-brand page-scroll" href="#page-top">A Donde Vamos ?</a>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="hidden">
-                    <a href="#page-top"></a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="/">Inicio</a>
-                </li>
-               
-                <li>
-                    @if (@ClsSesion.GetUsuarioLogueado() != null)
-                    {
-                        <a class="page-scroll" href="/Mapa/Mapa/">Mi perfil(@ClsSesion.GetEmailLogueado())</a>
-                    }
-                    else
-                    {
-                        @*<a class="page-scroll" href="/Home/Login/">Iniciar Sesion</a>*@
-
-                        @Html.ActionLink("Ya tengo cuenta", "Login", "Home", new { area = "" }, new { @class = "page-scroll" })
-                    }
-
-
-                </li>
-            </ul>
-        </div>
+    
+        
     </div>
 </nav>
 
 <header>
     <section id="login">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
+        <div class="limiter">
+            <div class="container-login100" style=" background: linear-gradient(180deg, #FFAB00, #C2185B), url('../img/intro-bg.jpg') center top no-repeat;">
+                <div class="wrap-login100 p-l-60 p-r-60 p-t-62 p-b-33">
+                    <form class="login100-form validate-form flex-sb flex-w">
 
-                    @if (TempData["mensaje"] != null)
-                    {
-                        <h2 class="section-heading">@TempData["mensaje"]</h2>
-                        <h3 class="section-subheading section-info">Lo siento, por favor reintente</h3>
-                    }
-                    else
-                    {
-                        <h2 class="section-heading">Pagina no encontrada!</h2>
-                        <h3 class="section-subheading section-info">Lo siento, la pagina no existe, por favor reintente</h3>
-                    }
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 text-center">
+
+                                    @if (TempData["mensaje"] != null)
+                                    {
+                                        <h2 class="section-heading">@TempData["mensaje"]</h2>
+                                        <h3 class="section-subheading section-info">Lo siento, por favor reintente</h3>
+                                    }
+                                    else
+                                    {
+                                        <h2 class="section-heading">Pagina no encontrada!</h2>
+                                        <h3 class="section-subheading section-info">Lo siento, la pagina no existe, por favor reintente</h3>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

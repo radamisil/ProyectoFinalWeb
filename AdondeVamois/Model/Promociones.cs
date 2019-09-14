@@ -11,11 +11,9 @@ namespace AdondeVamos.Model
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Promociones
     {
-        [Key]
         public int idPromocion { get; set; }
         public string Descripcion { get; set; }
         public int IdUsuario { get; set; }
@@ -23,6 +21,7 @@ namespace AdondeVamos.Model
         public Nullable<System.DateTime> fecha_alta { get; set; }
         public Nullable<System.DateTime> fecha_baja { get; set; }
         public string Foto { get; set; }
+        public Nullable<bool> Estado { get; set; }
     
         public virtual Lugares Lugares { get; set; }
         public virtual Usuarios Usuarios { get; set; }

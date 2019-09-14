@@ -1,0 +1,16 @@
+﻿@model AdondeVamos.Model.Promociones
+@using AdondeVamos.Model
+@{
+    Html.RenderPartial("_EstiloIndex");
+}
+
+@using (Html.BeginForm("AltaPromo", "Promociones", "Post"))
+{
+    @Html.AntiForgeryToken()
+
+    @{
+        ViewBag.Title = "Modificar";
+    }
+
+    <h2>Modificar</h2>
+
