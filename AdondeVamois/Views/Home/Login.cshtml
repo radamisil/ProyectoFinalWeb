@@ -1,118 +1,124 @@
 ﻿@using AdondeVamos.Model
-@model AdondeVamos.Model.Entities.Usuarios
+@model AdondeVamos.Model.Usuarios
 
 
 @{
     Html.RenderPartial("_EstiloIndex");
 }
-<nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-            </button>
-            <a class="navbar-brand page-scroll" href="#page-top">A Donde Vamos ?</a>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="hidden">
-                    <a href="#page-top"></a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="/">Inicio</a>
-                </li>
-                
-                <li>
 
-                    @if (@ClsSesion.GetUsuarioLogueado() != null)
-                    {
-                        <a class="page-scroll" href="/Mapa/Mapa/">Mi perfil(@ClsSesion.GetEmailLogueado())</a>
-                    }
-                    else
-                    {
-                        @*<a class="page-scroll" href="/Home/Login/">Iniciar Sesion</a>*@
-
-                        @Html.ActionLink("Ya tengo cuenta", "Login", "Home", new { area = "" }, new { @class = "page-scroll" })
-                    }
-
-
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
 <header>
     <section id="login">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Bienvenido nuevamente!</h2>
-                    <h3 class="section-subheading section-info">Para continuar, es necesario que inicies sesión.</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <form id="login-form" class="form" action="Loguear" method="post">
-                        @Html.AntiForgeryToken()
-                        @if (string.IsNullOrEmpty(ViewBag.Mensaje))
-                        {<div class="form-group">
-                                @*@Html.ValidationSummary(false, "", new { @class = "text-danger" })*@
-                                <div class="form-group col-lg-6 col-lg-offset-3">
-                                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "section-info" })
-                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control ", placeholder = "Email", autocomplete = "off" } })
-                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "alert-danger" })
-                                </div>
-
-
-                                <div class="form-group col-lg-6 col-lg-offset-3">
-                                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "section-info" })
-                                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password", autocomplete = "off" } })
-                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "alert-danger" })
-                                </div>
-
-                                <div class="form-group col-lg-6 col-lg-offset-3">
-                                    <label for="remember-me" class="section-info"><span>Recordar usuario</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label>
-                                    <br />
-                                    <br />
-                                    <input type="submit" name="submit" class="btn btn-xl" value="Ingresar">
-                                    <br />
-                                    <br />
-                                    <div id="register-link" class="text-center">
-                                        @Html.ActionLink("Aun no tengo cuenta", "Registracion", "Home", new { area = "" }, new { @class = "btn btn-primary btn-md" })
-                                    </div>
-                                </div>
-                                <br />
-                                <br />
-
+        <div class="container-login100" style=" background: linear-gradient(180deg, #FFAB00, #C2185B), url('../img/intro-bg.jpg') center top no-repeat;">
+            <div class="wrap-login100 p-l-60 p-r-60 p-t-62 p-b-33">
+                <div class="login100-form validate-form flex-sb flex-w">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <h2 class="section-heading">Bienvenido nuevamente!</h2>
                             </div>
-                        }
-                        @if (!string.IsNullOrEmpty(ViewBag.Mensaje))
-                        {//si existe un mensaje
-                            <div class="col-md-12">
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <form id="login-form" class="form" action="Loguear" method="post">
+                                    @Html.AntiForgeryToken()
+                                    @if (string.IsNullOrEmpty(ViewBag.Mensaje))
+                                    {<div class="form-group">
+                                            <br /><br />
+                                            <div class="wrap-input100 validate-input" data-validate="Correo requerido">
+                                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "input100", placeholder = "Correo", autocomplete = "off", type = "Email" } })
+                                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "section-info" })
+                                                <span class="focus-input100"></span>
+                                            </div>
+                                            <br />
+                                            <div class="wrap-input100 validate-input" data-validate="Contraseña requerida">
+                                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "input100", placeholder = "Contraseña", autocomplete = "off", type = "password" } })
+                                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "section-info" })
+                                                <span class="focus-input100"></span>
+                                            </div>
+                                            <br />
+                                            <div class="container-login100-form-btn m-t-17">
+                                                <button class="login100-form-btn" type="submit" name="submit">
+                                                    Ingresar
+                                                </button>
+                                            </div>
+                                            <div class="p-t-31 p-b-9">
+
+                                                <br />
+                                                <br />
+                                                <div id="register-link" class="text-center">
+                                                    @Html.ActionLink("Aun no tengo cuenta", "Registracion", "Home", new { area = "" }, new { @class = "btn btn-primary btn-md" })
+                                                </div>
+                                            </div>
 
 
-                                <h5>Sera redireccionado en unos segundos..</h5>
-                                @if (string.Equals(ViewBag.Mensaje, "E-mail y/o contraseña incorrectos, por favor intentá nuevamente"))
-                                {
-                                    <div class="alert alert-danger text-center">
-                                        <h5>@ViewBag.Mensaje</h5>
-                                        <meta http-equiv="refresh" content="2; url=/Home/login">
-                                    </div>
-                                }
-                                @if (!string.Equals(ViewBag.Mensaje, "E-mail y/o contraseña incorrectos, por favor intentá nuevamente"))
-                                {
-                                    <div class="alert alert-success text-center">
-                                        <h5>@ViewBag.Mensaje</h5>
-                                        <meta http-equiv="refresh" content="3; url=/">
-                                    </div>
-                                }
+                                        </div>
+                                    }
+                                   
+                                    @if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+                                    {//si existe un error de registro
+                                        <script type="text/javascript">
+                                            $(window).on('load', function () {
+                                                $('#modal').modal('show');
+                                            });
+                                        </script>
+                                        <div class="modal hide fade" id="modal">
 
+                                            @if (@ViewBag.Mensaje == "E-mail y/o contraseña incorrectos, por favor intentá nuevamente")
+                                            {
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Atención!</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>@ViewBag.Mensaje</p>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <script>
+                                                    setTimeout(function () {
+                                                        window.location.href = "/Home/Login";
+                                                    }, 4000);
+                                                </script>
+                                            }
+                                            @if (@ViewBag.Mensaje != "E-mail y/o contraseña incorrectos, por favor intentá nuevamente")
+                                            {
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Atención!</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Bienvenid@@!</p>
+                                                            <p>Sera redireccionado en unos segundos..</p>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <script>
+                                                    setTimeout(function () {
+                                                        window.location.href = "/Mapa/Mapa";
+                                                    }, 4000);
+                                                </script>
+                                            }
+
+                                        </div>
+                                    }
+                                </form>
                             </div>
-                        }
-                    </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-</header>
 
+
+</header>

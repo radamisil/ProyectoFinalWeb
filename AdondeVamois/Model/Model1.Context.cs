@@ -13,9 +13,11 @@ namespace AdondeVamos.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class A_DONDE_VAMOS : DbContext
+    public partial class condb : DbContext
     {
-        public A_DONDE_VAMOS()
+        internal readonly object Datos_Comercio;
+
+        public condb()
             : base("name=A_DONDE_VAMOS")
         {
         }

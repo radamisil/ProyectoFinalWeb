@@ -36,6 +36,7 @@ namespace AdondeVamois.Controllers
 
 
         //Pantalla Login
+        [HttpGet]
         public ActionResult Login()
         {
             Usuarios usr = new Usuarios();

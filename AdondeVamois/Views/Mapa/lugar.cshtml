@@ -1,0 +1,282 @@
+﻿@using AdondeVamos.Model
+@model AdondeVamos.Model.Usuarios
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>A donde vamos?</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/panel/plugins/font-awesome/css/font-awesome.min.css")">
+    <!-- IonIcons -->
+    <link rel="stylesheet" href="@Url.Content("http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css")">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/panel/dist/css/adminlte.min.css")">
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="@Url.Content("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700")">
+    <link rel="stylesheet" href="@Url.Content("https://fonts.googleapis.com/icon?family=Material+Icons")">
+    <!--Estilos -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/panel/dist/css/stylebuscador.css")">
+    <!--Buscador-->
+    <script src="@Url.Content("https://rawgit.com/dbrekalo/attire/master/dist/js/build.min.js")"></script>
+    <link rel="stylesheet" href="@Url.Content("~/Content/panel/dist/fastselect/fastselect.min.css")">
+    <script src="@Url.Content("~/Content/panel/dist/fastselect/fastselect.standalone.js")"></script>
+    <script>var urlParams = new URLSearchParams(window.location.search);</script>
+    <style>
+        #map {
+            height: 70%;
+        }
+
+        #description {
+            font-family: Roboto;
+            font-size: 15px;
+            font-weight: 300;
+        }
+
+        #infowindow-content .title {
+            font-weight: bold;
+        }
+
+        #infowindow-content {
+            display: none;
+        }
+
+        #map #infowindow-content {
+            display: inline;
+        }
+
+        .pac-card {
+            margin: 10px 10px 0 0;
+            border-radius: 2px 0 0 2px;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            outline: none;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            background-color: #fff;
+            font-family: Roboto;
+        }
+
+        #pac-container {
+            padding-bottom: 12px;
+            margin-right: 12px;
+        }
+
+        .pac-controls {
+            display: inline-block;
+            padding: 5px 11px;
+        }
+
+            .pac-controls label {
+                font-family: Roboto;
+                font-size: 13px;
+                font-weight: 300;
+            }
+
+        #pac-input {
+            background-color: #fff;
+            font-family: Roboto;
+            font-size: 15px;
+            font-weight: 300;
+            margin-left: 12px;
+            padding: 0 11px 0 13px;
+            text-overflow: ellipsis;
+            width: 400px;
+        }
+
+            #pac-input:focus {
+                border-color: #4d90fe;
+            }
+
+
+
+        #target {
+            width: 345px;
+        }
+
+        .toggleBtn {
+            display: none;
+        }
+        .popup-bubble {
+            /* Position the bubble centred-above its parent. */
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -100%);
+            /* Style the bubble. */
+            background-color: white;
+            padding: 5px;
+            border-radius: 5px;
+            font-family: sans-serif;
+            overflow-y: auto;
+            max-height: 100px;
+            box-shadow: 0px 2px 10px 1px rgba(0,0,0,0.5);
+        }
+    </style>
+    <script>
+        // This example requires the Places library. Include the libraries=places
+        // parameter when you first load the API. For example:
+        // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: -34.6037389, lng: -58.3815704 },
+                zoom: 10
+            });
+
+            var request = {
+                placeId: urlParams.get('lugar'),
+                fields: ['name', 'formatted_address', 'place_id', 'geometry', 'formatted_address', 'opening_hours.open_now', 'formatted_phone_number', 'international_phone_number', 'url', 'rating']
+            };
+
+            var infowindow = new google.maps.InfoWindow();
+            var service = new google.maps.places.PlacesService(map);
+            
+            service.getDetails(request, function (place, status) {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: place.geometry.location
+                    });
+                    google.maps.event.addListener(marker, 'click', function () {
+
+                        //infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+                        //    'Place ID: ' + place.place_id + '<br>' +
+                        //    place.formatted_address + '</div>');
+                        if (place.opening_hours.open_now = true) { var estado = 'Abierto' } else { var estado = 'Cerrado ' };
+
+                        infowindow.setContent('<div align="center" style="height="100px""><h3>' + place.name + '</h3><br/><h5> Dirección : ' + place.formatted_address + '</h5><h5> Telefono : ' + place.formatted_phone_number + '</h5><h5>Estado : ' + estado + '</h5> <h5> Puntuación : ' + place.rating + '</h5></div>');
+
+                        infowindow.open(map, this);
+
+                        
+                    });
+                }
+            });
+        }
+
+    </script>
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper" style="margin-top:-16px;">
+        <nav class="main-header navbar navbar-expand bg-dark navbar-dark border-bottom">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item d-none d-sm-inline-block">
+                    <strong>Tenes un comercio? si te adheris y sumas promociones, tambien sumas visitantes!</strong>&nbsp;&nbsp;<a class="btn btn-success btn-xs" href="altaComerciante">Mas info</a>
+                </li>
+                <li>
+                    &nbsp;
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="miCuenta" class="nav-link">Mi cuenta </a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="http://adondevamos.ddns.net" class="nav-link">Salir</a>
+                </li>
+            </ul>
+        </nav>
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Logo -->
+            <a href="indexUsuario.html" class="brand-link">
+                <img src="@Url.Content("~/Content/panel/dist/img/icon.png")" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">A donde vamos?</span>
+            </a>
+            <div class="sidebar">
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img src="@Url.Content("~/Content/panel/dist/img/avatar5.png")" class="img-circle elevation-2" alt="User Image">
+                    </div>
+                    <div class="info">
+                        <a href="#" class="d-block">@Session["Usuario"]</a>
+                    </div>
+                </div>
+                <!--Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <li class="nav-item">
+                            <a href="Mapa" class="nav-link active">
+                                <i class="nav-icon fa fa-search"></i>
+                                <p>
+                                    Buscar lugar..
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="Promociones" class="nav-link">
+                                <i class="nav-icon fa fa-search"></i>
+
+                                Buscar promociones..
+
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <div class="content-wrapper">
+            @*<div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark"><button onclick="alert(estado)">boton</button> </h1>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+            <br />
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body" style="background-color:white;">
+                                    <br />
+                                    <div class="row">
+                                        <div class="col col-md-6 col-sm-12">
+                                            <h3>Datos del comercio</h3>
+                                        </div>
+                                        <div class="col col-md-6 col-sm-12 ">
+                                            <a class="btn btn-xs btn-info" href="Mapa">Volver al buscador</a>
+
+                                            <script async defer
+                                                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMfHFvJTPHMgD5zBbRbuJdOjIOJ_HdL4o&libraries=places&callback=initMap">
+                                            </script>
+
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div id="map"></div>
+        </div>
+        <aside class="control-sidebar control-sidebar-dark"></aside>
+    </div>
+
+
+    <script src="@Url.Content("~/Content/panel/plugins/jquery/jquery.min.js")"></script>
+    <!-- Bootstrap -->
+    <script src="@Url.Content("~/Content/panel/plugins/bootstrap/js/bootstrap.bundle.min.js")"></script>
+    <!-- AdminLTE -->
+    <script src="@Url.Content("~/Content/panel/dist/js/adminlte.js")"></script>
+    <!-- OPTIONAL SCRIPTS -->
+    <script src="@Url.Content("~/Content/panel/plugins/chart.js/Chart.min.js")"></script>
+    <script src="@Url.Content("~/Content/panel/dist/js/demo.js")"></script>
+    <script src="@Url.Content("~/Content/panel/dist/js/pages/dashboard3.js")"></script>
+
+</body>
+</html>

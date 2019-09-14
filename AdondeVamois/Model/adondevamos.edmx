@@ -1,0 +1,855 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="A_DONDE_VAMOSModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Datos_Comercio">
+          <Key>
+            <PropertyRef Name="IdDatos_comercio" />
+          </Key>
+          <Property Name="IdDatos_comercio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="direecion" Type="varchar" MaxLength="100" />
+          <Property Name="telefono" Type="varchar" MaxLength="50" />
+          <Property Name="capacidad" Type="int" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Horarios_concurridos">
+          <Key>
+            <PropertyRef Name="IdHorarios_concurridos" />
+          </Key>
+          <Property Name="IdHorarios_concurridos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Dia" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Hora" Type="int" />
+          <Property Name="IdLugar" Type="int" />
+          <Property Name="cantidad" Type="int" />
+          <Property Name="fecha_insercion" Type="date" />
+        </EntityType>
+        <EntityType Name="Lugares">
+          <Key>
+            <PropertyRef Name="IdLugar" />
+          </Key>
+          <Property Name="IdLugar" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Capacidad" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Promociones">
+          <Key>
+            <PropertyRef Name="idPromocion" />
+          </Key>
+          <Property Name="idPromocion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="400" />
+          <Property Name="IdUsuario" Type="int" Nullable="false" />
+          <Property Name="IdLugar" Type="int" Nullable="false" />
+          <Property Name="fecha_alta" Type="date" />
+          <Property Name="fecha_baja" Type="date" />
+          <Property Name="Foto" Type="nvarchar(max)" />
+          <Property Name="Estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="Seguidores">
+          <Key>
+            <PropertyRef Name="Idseguidor" />
+          </Key>
+          <Property Name="Idseguidor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="IdLugar" Type="int" />
+        </EntityType>
+        <EntityType Name="Tipo_Comercio">
+          <Key>
+            <PropertyRef Name="IdTipo_comercio" />
+          </Key>
+          <Property Name="IdTipo_comercio" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Tipo_Usuarios">
+          <Key>
+            <PropertyRef Name="IdTipo" />
+          </Key>
+          <Property Name="IdTipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario_lugar_historial">
+          <Key>
+            <PropertyRef Name="IdUsu_lug_hist" />
+          </Key>
+          <Property Name="IdUsu_lug_hist" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idUsuario" Type="int" />
+          <Property Name="idLugar" Type="int" />
+          <Property Name="coordenadasGoogle" Type="varchar" MaxLength="700" />
+          <Property Name="nombreGoogle" Type="varchar" MaxLength="100" />
+          <Property Name="fecha" Type="date" />
+        </EntityType>
+        <EntityType Name="Usuario_lugares">
+          <Key>
+            <PropertyRef Name="IdLugar" />
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdLugar" Type="int" Nullable="false" />
+          <Property Name="IdUsuario" Type="int" Nullable="false" />
+          <Property Name="Comentario" Type="nvarchar" MaxLength="200" />
+          <Property Name="Puntuacion" Type="int" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Apellido" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fecha_nac" Type="date" Nullable="false" />
+          <Property Name="Foto" Type="nvarchar(max)" />
+          <Property Name="IdTipo" Type="int" />
+          <Property Name="IdTipo_comercio" Type="int" />
+          <Property Name="IdDatos_comercio" Type="int" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'A_DONDE_VAMOS.sys.database_firewall_rules' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="start_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="end_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
+          <Property Name="modify_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Datos_Comercio">
+          <End Role="Datos_Comercio" Type="Self.Datos_Comercio" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Datos_Comercio">
+              <PropertyRef Name="IdDatos_comercio" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="IdDatos_comercio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_lug_hist">
+          <End Role="Lugares" Type="Self.Lugares" Multiplicity="0..1" />
+          <End Role="Usuario_lugar_historial" Type="Self.Usuario_lugar_historial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lugares">
+              <PropertyRef Name="IdLugar" />
+            </Principal>
+            <Dependent Role="Usuario_lugar_historial">
+              <PropertyRef Name="idLugar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_lugar">
+          <End Role="Lugares" Type="Self.Lugares" Multiplicity="1" />
+          <End Role="Usuario_lugares" Type="Self.Usuario_lugares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lugares">
+              <PropertyRef Name="IdLugar" />
+            </Principal>
+            <Dependent Role="Usuario_lugares">
+              <PropertyRef Name="IdLugar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Metrica">
+          <End Role="Lugares" Type="Self.Lugares" Multiplicity="0..1" />
+          <End Role="Horarios_concurridos" Type="Self.Horarios_concurridos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lugares">
+              <PropertyRef Name="IdLugar" />
+            </Principal>
+            <Dependent Role="Horarios_concurridos">
+              <PropertyRef Name="IdLugar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_promocion_lugar">
+          <End Role="Lugares" Type="Self.Lugares" Multiplicity="1" />
+          <End Role="Promociones" Type="Self.Promociones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lugares">
+              <PropertyRef Name="IdLugar" />
+            </Principal>
+            <Dependent Role="Promociones">
+              <PropertyRef Name="IdLugar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_promocion_usuario">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Promociones" Type="Self.Promociones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Promociones">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_seg_lug">
+          <End Role="Lugares" Type="Self.Lugares" Multiplicity="0..1" />
+          <End Role="Seguidores" Type="Self.Seguidores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lugares">
+              <PropertyRef Name="IdLugar" />
+            </Principal>
+            <Dependent Role="Seguidores">
+              <PropertyRef Name="IdLugar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_seg_usu">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+          <End Role="Seguidores" Type="Self.Seguidores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Seguidores">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tipo_Comercio">
+          <End Role="Tipo_Comercio" Type="Self.Tipo_Comercio" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Comercio">
+              <PropertyRef Name="IdTipo_comercio" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="IdTipo_comercio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tipo_Usuario">
+          <End Role="Tipo_Usuarios" Type="Self.Tipo_Usuarios" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Usuarios">
+              <PropertyRef Name="IdTipo" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="IdTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usu_hist">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+          <End Role="Usuario_lugar_historial" Type="Self.Usuario_lugar_historial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Usuario_lugar_historial">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Usuario_lugares" Type="Self.Usuario_lugares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Usuario_lugares">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SP_GetPromociones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="filterPlace" Type="varchar" Mode="In" />
+          <Parameter Name="filterUser" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_GetUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="filter" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="A_DONDE_VAMOSModel1StoreContainer">
+          <EntitySet Name="Datos_Comercio" EntityType="Self.Datos_Comercio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Horarios_concurridos" EntityType="Self.Horarios_concurridos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lugares" EntityType="Self.Lugares" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Promociones" EntityType="Self.Promociones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Seguidores" EntityType="Self.Seguidores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tipo_Comercio" EntityType="Self.Tipo_Comercio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tipo_Usuarios" EntityType="Self.Tipo_Usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario_lugar_historial" EntityType="Self.Usuario_lugar_historial" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario_lugares" EntityType="Self.Usuario_lugares" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
+            <DefiningQuery>SELECT 
+    [database_firewall_rules].[id] AS [id], 
+    [database_firewall_rules].[name] AS [name], 
+    [database_firewall_rules].[start_ip_address] AS [start_ip_address], 
+    [database_firewall_rules].[end_ip_address] AS [end_ip_address], 
+    [database_firewall_rules].[create_date] AS [create_date], 
+    [database_firewall_rules].[modify_date] AS [modify_date]
+    FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Datos_Comercio" Association="Self.FK_Datos_Comercio">
+            <End Role="Datos_Comercio" EntitySet="Datos_Comercio" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_lug_hist" Association="Self.FK_lug_hist">
+            <End Role="Lugares" EntitySet="Lugares" />
+            <End Role="Usuario_lugar_historial" EntitySet="Usuario_lugar_historial" />
+          </AssociationSet>
+          <AssociationSet Name="FK_lugar" Association="Self.FK_lugar">
+            <End Role="Lugares" EntitySet="Lugares" />
+            <End Role="Usuario_lugares" EntitySet="Usuario_lugares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Metrica" Association="Self.FK_Metrica">
+            <End Role="Lugares" EntitySet="Lugares" />
+            <End Role="Horarios_concurridos" EntitySet="Horarios_concurridos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_promocion_lugar" Association="Self.FK_promocion_lugar">
+            <End Role="Lugares" EntitySet="Lugares" />
+            <End Role="Promociones" EntitySet="Promociones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_promocion_usuario" Association="Self.FK_promocion_usuario">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Promociones" EntitySet="Promociones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_seg_lug" Association="Self.FK_seg_lug">
+            <End Role="Lugares" EntitySet="Lugares" />
+            <End Role="Seguidores" EntitySet="Seguidores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_seg_usu" Association="Self.FK_seg_usu">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Seguidores" EntitySet="Seguidores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tipo_Comercio" Association="Self.FK_Tipo_Comercio">
+            <End Role="Tipo_Comercio" EntitySet="Tipo_Comercio" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tipo_Usuario" Association="Self.FK_Tipo_Usuario">
+            <End Role="Tipo_Usuarios" EntitySet="Tipo_Usuarios" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usu_hist" Association="Self.FK_usu_hist">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Usuario_lugar_historial" EntitySet="Usuario_lugar_historial" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario" Association="Self.FK_Usuario">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Usuario_lugares" EntitySet="Usuario_lugares" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="A_DONDE_VAMOSModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Datos_Comercio">
+          <Key>
+            <PropertyRef Name="IdDatos_comercio" />
+          </Key>
+          <Property Name="IdDatos_comercio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="direecion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="capacidad" Type="Int32" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Datos_Comercio" FromRole="Datos_Comercio" ToRole="Usuarios" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Horarios_concurridos">
+          <Key>
+            <PropertyRef Name="IdHorarios_concurridos" />
+          </Key>
+          <Property Name="IdHorarios_concurridos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Dia" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Hora" Type="Int32" />
+          <Property Name="IdLugar" Type="Int32" />
+          <Property Name="cantidad" Type="Int32" />
+          <Property Name="fecha_insercion" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Lugares" Relationship="Self.FK_Metrica" FromRole="Horarios_concurridos" ToRole="Lugares" />
+        </EntityType>
+        <EntityType Name="Lugares">
+          <Key>
+            <PropertyRef Name="IdLugar" />
+          </Key>
+          <Property Name="IdLugar" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Capacidad" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Horarios_concurridos" Relationship="Self.FK_Metrica" FromRole="Lugares" ToRole="Horarios_concurridos" />
+          <NavigationProperty Name="Usuario_lugar_historial" Relationship="Self.FK_lug_hist" FromRole="Lugares" ToRole="Usuario_lugar_historial" />
+          <NavigationProperty Name="Usuario_lugares" Relationship="Self.FK_lugar" FromRole="Lugares" ToRole="Usuario_lugares" />
+          <NavigationProperty Name="Promociones" Relationship="Self.FK_promocion_lugar" FromRole="Lugares" ToRole="Promociones" />
+          <NavigationProperty Name="Seguidores" Relationship="Self.FK_seg_lug" FromRole="Lugares" ToRole="Seguidores" />
+        </EntityType>
+        <EntityType Name="Promociones">
+          <Key>
+            <PropertyRef Name="idPromocion" />
+          </Key>
+          <Property Name="idPromocion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="IdLugar" Type="Int32" Nullable="false" />
+          <Property Name="fecha_alta" Type="DateTime" Precision="0" />
+          <Property Name="fecha_baja" Type="DateTime" Precision="0" />
+          <Property Name="Foto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Estado" Type="Boolean" />
+          <NavigationProperty Name="Lugares" Relationship="Self.FK_promocion_lugar" FromRole="Promociones" ToRole="Lugares" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_promocion_usuario" FromRole="Promociones" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Seguidores">
+          <Key>
+            <PropertyRef Name="Idseguidor" />
+          </Key>
+          <Property Name="Idseguidor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="IdLugar" Type="Int32" />
+          <NavigationProperty Name="Lugares" Relationship="Self.FK_seg_lug" FromRole="Seguidores" ToRole="Lugares" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_seg_usu" FromRole="Seguidores" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Tipo_Comercio">
+          <Key>
+            <PropertyRef Name="IdTipo_comercio" />
+          </Key>
+          <Property Name="IdTipo_comercio" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Tipo_Comercio" FromRole="Tipo_Comercio" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Tipo_Usuarios">
+          <Key>
+            <PropertyRef Name="IdTipo" />
+          </Key>
+          <Property Name="IdTipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Tipo_Usuario" FromRole="Tipo_Usuarios" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Usuario_lugar_historial">
+          <Key>
+            <PropertyRef Name="IdUsu_lug_hist" />
+          </Key>
+          <Property Name="IdUsu_lug_hist" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idUsuario" Type="Int32" />
+          <Property Name="idLugar" Type="Int32" />
+          <Property Name="coordenadasGoogle" Type="String" MaxLength="700" FixedLength="false" Unicode="false" />
+          <Property Name="nombreGoogle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="fecha" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Lugares" Relationship="Self.FK_lug_hist" FromRole="Usuario_lugar_historial" ToRole="Lugares" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_usu_hist" FromRole="Usuario_lugar_historial" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Usuario_lugares">
+          <Key>
+            <PropertyRef Name="IdLugar" />
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdLugar" Type="Int32" Nullable="false" />
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="Comentario" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Puntuacion" Type="Int32" />
+          <NavigationProperty Name="Lugares" Relationship="Self.FK_lugar" FromRole="Usuario_lugares" ToRole="Lugares" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuario" FromRole="Usuario_lugares" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Apellido" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fecha_nac" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Foto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdTipo" Type="Int32" />
+          <Property Name="IdTipo_comercio" Type="Int32" />
+          <Property Name="IdDatos_comercio" Type="Int32" />
+          <NavigationProperty Name="Datos_Comercio" Relationship="Self.FK_Datos_Comercio" FromRole="Usuarios" ToRole="Datos_Comercio" />
+          <NavigationProperty Name="Promociones" Relationship="Self.FK_promocion_usuario" FromRole="Usuarios" ToRole="Promociones" />
+          <NavigationProperty Name="Seguidores" Relationship="Self.FK_seg_usu" FromRole="Usuarios" ToRole="Seguidores" />
+          <NavigationProperty Name="Tipo_Comercio" Relationship="Self.FK_Tipo_Comercio" FromRole="Usuarios" ToRole="Tipo_Comercio" />
+          <NavigationProperty Name="Tipo_Usuarios" Relationship="Self.FK_Tipo_Usuario" FromRole="Usuarios" ToRole="Tipo_Usuarios" />
+          <NavigationProperty Name="Usuario_lugar_historial" Relationship="Self.FK_usu_hist" FromRole="Usuarios" ToRole="Usuario_lugar_historial" />
+          <NavigationProperty Name="Usuario_lugares" Relationship="Self.FK_Usuario" FromRole="Usuarios" ToRole="Usuario_lugares" />
+        </EntityType>
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="start_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="end_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK_Datos_Comercio">
+          <End Role="Datos_Comercio" Type="Self.Datos_Comercio" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Datos_Comercio">
+              <PropertyRef Name="IdDatos_comercio" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="IdDatos_comercio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Metrica">
+          <End Role="Lugares" Type="Self.Lugares" Multiplicity="0..1" />
+          <End Role="Horarios_concurridos" Type="Self.Horarios_concurridos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lugares">
+              <PropertyRef Name="IdLugar" />
+            </Principal>
+            <Dependent Role="Horarios_concurridos">
+              <PropertyRef Name="IdLugar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_lug_hist">
+          <End Role="Lugares" Type="Self.Lugares" Multiplicity="0..1" />
+          <End Role="Usuario_lugar_historial" Type="Self.Usuario_lugar_historial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lugares">
+              <PropertyRef Name="IdLugar" />
+            </Principal>
+            <Dependent Role="Usuario_lugar_historial">
+              <PropertyRef Name="idLugar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_lugar">
+          <End Role="Lugares" Type="Self.Lugares" Multiplicity="1" />
+          <End Role="Usuario_lugares" Type="Self.Usuario_lugares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lugares">
+              <PropertyRef Name="IdLugar" />
+            </Principal>
+            <Dependent Role="Usuario_lugares">
+              <PropertyRef Name="IdLugar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_promocion_lugar">
+          <End Role="Lugares" Type="Self.Lugares" Multiplicity="1" />
+          <End Role="Promociones" Type="Self.Promociones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lugares">
+              <PropertyRef Name="IdLugar" />
+            </Principal>
+            <Dependent Role="Promociones">
+              <PropertyRef Name="IdLugar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_seg_lug">
+          <End Role="Lugares" Type="Self.Lugares" Multiplicity="0..1" />
+          <End Role="Seguidores" Type="Self.Seguidores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lugares">
+              <PropertyRef Name="IdLugar" />
+            </Principal>
+            <Dependent Role="Seguidores">
+              <PropertyRef Name="IdLugar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_promocion_usuario">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Promociones" Type="Self.Promociones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Promociones">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_seg_usu">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+          <End Role="Seguidores" Type="Self.Seguidores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Seguidores">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tipo_Comercio">
+          <End Role="Tipo_Comercio" Type="Self.Tipo_Comercio" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Comercio">
+              <PropertyRef Name="IdTipo_comercio" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="IdTipo_comercio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tipo_Usuario">
+          <End Role="Tipo_Usuarios" Type="Self.Tipo_Usuarios" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Usuarios">
+              <PropertyRef Name="IdTipo" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="IdTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usu_hist">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+          <End Role="Usuario_lugar_historial" Type="Self.Usuario_lugar_historial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Usuario_lugar_historial">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Usuario_lugares" Type="Self.Usuario_lugares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Usuario_lugares">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="A_DONDE_VAMOSEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Datos_Comercio" EntityType="Self.Datos_Comercio" />
+          <EntitySet Name="Horarios_concurridos" EntityType="Self.Horarios_concurridos" />
+          <EntitySet Name="Lugares" EntityType="Self.Lugares" />
+          <EntitySet Name="Promociones" EntityType="Self.Promociones" />
+          <EntitySet Name="Seguidores" EntityType="Self.Seguidores" />
+          <EntitySet Name="Tipo_Comercio" EntityType="Self.Tipo_Comercio" />
+          <EntitySet Name="Tipo_Usuarios" EntityType="Self.Tipo_Usuarios" />
+          <EntitySet Name="Usuario_lugar_historial" EntityType="Self.Usuario_lugar_historial" />
+          <EntitySet Name="Usuario_lugares" EntityType="Self.Usuario_lugares" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" />
+          <AssociationSet Name="FK_Datos_Comercio" Association="Self.FK_Datos_Comercio">
+            <End Role="Datos_Comercio" EntitySet="Datos_Comercio" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Metrica" Association="Self.FK_Metrica">
+            <End Role="Lugares" EntitySet="Lugares" />
+            <End Role="Horarios_concurridos" EntitySet="Horarios_concurridos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_lug_hist" Association="Self.FK_lug_hist">
+            <End Role="Lugares" EntitySet="Lugares" />
+            <End Role="Usuario_lugar_historial" EntitySet="Usuario_lugar_historial" />
+          </AssociationSet>
+          <AssociationSet Name="FK_lugar" Association="Self.FK_lugar">
+            <End Role="Lugares" EntitySet="Lugares" />
+            <End Role="Usuario_lugares" EntitySet="Usuario_lugares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_promocion_lugar" Association="Self.FK_promocion_lugar">
+            <End Role="Lugares" EntitySet="Lugares" />
+            <End Role="Promociones" EntitySet="Promociones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_seg_lug" Association="Self.FK_seg_lug">
+            <End Role="Lugares" EntitySet="Lugares" />
+            <End Role="Seguidores" EntitySet="Seguidores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_promocion_usuario" Association="Self.FK_promocion_usuario">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Promociones" EntitySet="Promociones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_seg_usu" Association="Self.FK_seg_usu">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Seguidores" EntitySet="Seguidores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tipo_Comercio" Association="Self.FK_Tipo_Comercio">
+            <End Role="Tipo_Comercio" EntitySet="Tipo_Comercio" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tipo_Usuario" Association="Self.FK_Tipo_Usuario">
+            <End Role="Tipo_Usuarios" EntitySet="Tipo_Usuarios" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usu_hist" Association="Self.FK_usu_hist">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Usuario_lugar_historial" EntitySet="Usuario_lugar_historial" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario" Association="Self.FK_Usuario">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Usuario_lugares" EntitySet="Usuario_lugares" />
+          </AssociationSet>
+          <FunctionImport Name="SP_GetPromociones">
+            <Parameter Name="filterPlace" Mode="In" Type="String" />
+            <Parameter Name="filterUser" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GetUsuarios">
+          <Parameter Name="filter" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="A_DONDE_VAMOSModel1StoreContainer" CdmEntityContainer="A_DONDE_VAMOSEntities2">
+          <EntitySetMapping Name="Datos_Comercio">
+            <EntityTypeMapping TypeName="A_DONDE_VAMOSModel1.Datos_Comercio">
+              <MappingFragment StoreEntitySet="Datos_Comercio">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="IdDatos_comercio" ColumnName="IdDatos_comercio" />
+                <ScalarProperty Name="direecion" ColumnName="direecion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="capacidad" ColumnName="capacidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Horarios_concurridos">
+            <EntityTypeMapping TypeName="A_DONDE_VAMOSModel1.Horarios_concurridos">
+              <MappingFragment StoreEntitySet="Horarios_concurridos">
+                <ScalarProperty Name="IdHorarios_concurridos" ColumnName="IdHorarios_concurridos" />
+                <ScalarProperty Name="Dia" ColumnName="Dia" />
+                <ScalarProperty Name="Hora" ColumnName="Hora" />
+                <ScalarProperty Name="IdLugar" ColumnName="IdLugar" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="fecha_insercion" ColumnName="fecha_insercion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lugares">
+            <EntityTypeMapping TypeName="A_DONDE_VAMOSModel1.Lugares">
+              <MappingFragment StoreEntitySet="Lugares">
+                <ScalarProperty Name="IdLugar" ColumnName="IdLugar" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Capacidad" ColumnName="Capacidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Promociones">
+            <EntityTypeMapping TypeName="A_DONDE_VAMOSModel1.Promociones">
+              <MappingFragment StoreEntitySet="Promociones">
+                <ScalarProperty Name="idPromocion" ColumnName="idPromocion" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdLugar" ColumnName="IdLugar" />
+                <ScalarProperty Name="fecha_alta" ColumnName="fecha_alta" />
+                <ScalarProperty Name="fecha_baja" ColumnName="fecha_baja" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seguidores">
+            <EntityTypeMapping TypeName="A_DONDE_VAMOSModel1.Seguidores">
+              <MappingFragment StoreEntitySet="Seguidores">
+                <ScalarProperty Name="Idseguidor" ColumnName="Idseguidor" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdLugar" ColumnName="IdLugar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipo_Comercio">
+            <EntityTypeMapping TypeName="A_DONDE_VAMOSModel1.Tipo_Comercio">
+              <MappingFragment StoreEntitySet="Tipo_Comercio">
+                <ScalarProperty Name="IdTipo_comercio" ColumnName="IdTipo_comercio" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipo_Usuarios">
+            <EntityTypeMapping TypeName="A_DONDE_VAMOSModel1.Tipo_Usuarios">
+              <MappingFragment StoreEntitySet="Tipo_Usuarios">
+                <ScalarProperty Name="IdTipo" ColumnName="IdTipo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario_lugar_historial">
+            <EntityTypeMapping TypeName="A_DONDE_VAMOSModel1.Usuario_lugar_historial">
+              <MappingFragment StoreEntitySet="Usuario_lugar_historial">
+                <ScalarProperty Name="IdUsu_lug_hist" ColumnName="IdUsu_lug_hist" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="idLugar" ColumnName="idLugar" />
+                <ScalarProperty Name="coordenadasGoogle" ColumnName="coordenadasGoogle" />
+                <ScalarProperty Name="nombreGoogle" ColumnName="nombreGoogle" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario_lugares">
+            <EntityTypeMapping TypeName="A_DONDE_VAMOSModel1.Usuario_lugares">
+              <MappingFragment StoreEntitySet="Usuario_lugares">
+                <ScalarProperty Name="IdLugar" ColumnName="IdLugar" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+                <ScalarProperty Name="Puntuacion" ColumnName="Puntuacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="A_DONDE_VAMOSModel1.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Fecha_nac" ColumnName="Fecha_nac" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="IdTipo" ColumnName="IdTipo" />
+                <ScalarProperty Name="IdTipo_comercio" ColumnName="IdTipo_comercio" />
+                <ScalarProperty Name="IdDatos_comercio" ColumnName="IdDatos_comercio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="database_firewall_rules">
+            <EntityTypeMapping TypeName="A_DONDE_VAMOSModel1.database_firewall_rules">
+              <MappingFragment StoreEntitySet="database_firewall_rules">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
+                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetPromociones" FunctionName="A_DONDE_VAMOSModel1.Store.SP_GetPromociones" />
+          <FunctionImportMapping FunctionImportName="SP_GetUsuarios" FunctionName="A_DONDE_VAMOSModel1.Store.SP_GetUsuarios" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
